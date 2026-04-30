@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SSMX</title>
 <head>
-    <link rel="stylesheet href=https://cdnjs.cloudfare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>    
     <link rel="stylesheet" href="{% static 'css/style.css'%}"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
@@ -29,7 +29,7 @@
     </nav>
 </header>
 <main>
-    <div class="swiper">
+    <div class="swiper-hero">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <video autoplay loop muted playsinline>
@@ -47,17 +47,56 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
-    <div>
-        <h3>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-        </h3>
+    <section class="sobre-nosotros">
+    <div class="container">
+        <h2 class="titulo-seccion">Sobre Nosotros</h2>
+        <div class="divider"></div>
+        
+        <div class="grid-nosotros">
+            <div class="tarjeta-nosotros">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Seguridad Garantizada</h3>
+                <p>Expertos en instalación y monitoreo de sistemas de videovigilancia con tecnología de punta.</p>
+            </div>
+
+            <div class="tarjeta-nosotros">
+                <i class="fas fa-location-dot"></i>
+                <h3>Cobertura Local</h3>
+                <p>Brindamos servicio especializado en Coacalco, Tultitlán y toda la zona metropolitana del Valle de México.</p>
+            </div>
+
+            <div class="tarjeta-nosotros">
+                <i class="fas fa-user-gear"></i>
+                <h3>Soporte Técnico</h3>
+                <p>Asistencia profesional y mantenimiento para que tus equipos nunca dejen de protegerte.</p>
+            </div>
+        </div>
     </div>
+</section>
+<section class="seccion-marcas">
+    <div class="swiper swiper-marcas">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="{% static 'images/accesspro.png' %}" alt="Logo 1"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log_yaestar.png' %}" alt="Logo 2"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_allied.png' %}" alt="Logo 1"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_altai.png' %}" alt="Logo 2"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_cambium.png' %}" alt="Logo 1"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_came.png' %}" alt="Logo 2"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_charofill.png' %}" alt="Logo 1"></div>
+            <div class="swiper-slide"><img src="{% static 'images/log2_faac.png' %}" alt="Logo 2"></div>
+            </div>
+    </div>
+</section>
 </main>
 <footer>
-    <p>Correo de Contacto: 
-        <a href="mailto:contactosytemseguridad@gmail.com">contactosytemseguridad@gmail.com</a>
-        <div><a href="https://wa.me/5540012254?text=Hola,%20me%20interesa%20una%20cotización" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366; font-size: 30px;"></i>Contactanos por WhatsApp</a></div>
-        <div><a href="tel:+525592790985" class="boton_contacto">Llamenos!</a></div>
-    &copy; Todos los Derechos Reservados</p>
+        <div class="contact-links">
+        <a href="mailto:contacto@systemseguridadmx.com" class="btn-contacto btn-correo">
+        <i class="fas fa-envelope"></i>
+        <span>Escribenos un Correo!</span></a>
+        <div><a href="https://wa.me/5540012254?text=Hola,%20me%20interesa%20una%20cotización" class="btn-contacto btn-whatsapp"><i class="fab fa-whatsapp"></i><span>Contactanos por WhatsApp</span></a></div>
+        <div><a href="tel:+525592790985" class="btn-contacto btn-telefono"><i class="fas fa-phone"></i><span>Llamenos!</span></a></div>
+    </div>
+    &copy; Todos los Derechos Reservados - System Seguridad MX
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{% static 'js/main.js' %}"></script>

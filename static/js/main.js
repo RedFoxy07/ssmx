@@ -17,3 +17,21 @@
             },
         });
     };
+
+    const swiperMarcas = new Swiper('.swiper-marcas', {
+        slidesPerView: 6,      // Cuántos logos se ven a la vez
+        spaceBetween: 30,
+        loop: true,            // Infinito
+        freeMode: true,        // Movimiento fluido, no por "pasos"
+        speed: 5000,           // Velocidad constante (5 segundos por vuelta)
+        autoplay: {
+        delay: 0,          // 0 para que nunca se detenga
+        disableOnInteraction: false,
+        },
+    breakpoints: {
+        // Ajuste para celulares (cuando la pantalla es pequeña)
+    320: { slidesPerView: 2 },
+    768: { slidesPerView: 4 },
+    1024: { slidesPerView: 6 }
+        }
+    });
