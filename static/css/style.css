@@ -166,7 +166,34 @@
     height: 100%;
     object-fit: cover; 
     object-position: center;
+    }
+    .swiper-marcas{
+        background-color: #ffffff;
+        height: 100px !important;
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #FFD700;
+        border-bottom: 1px solid #ffd700;
+    }
+    .swiper-marcas .swiper-wrapper{
+        transition-timing-function: linear !important;
+        transition-duration: 8000;
+    }
+    .swiper-free-mode > .swiper-wrapper{
+        transition-timing-function: linear !important;
     }   
+    .swiper-marcas .swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    }
+    .swiper-marcas .swiper-slide img{
+        max-height: 100px;
+        width: auto;
+        object-fit: contain;
+        background-color: #ffffff;
+    }
     .btn-contacto {
     display: inline-flex;
     align-items: center;
@@ -198,6 +225,22 @@
 
     .btn-correo span {
     color: #ffffff;
+    }
+    .btn-mapa{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin: 10px;
+    transition: 0.3s;
+    }
+    .btn-mapa i{
+    font-size: 22px;
+    color: #ea4335;
+    }
+    .btn-mapa span{
+    color:#ffffff;
     }
     .contact-links {
     display: flex;
