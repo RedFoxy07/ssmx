@@ -19,29 +19,32 @@
         <span class="logo-text">System Seguridad MX</span>
     </a>
     <nav class="menu">
-        <a href="#soluciones.html">Soluciones Y Productos</a>
-        <a href="#casos.html">Casos de Exito</a>
-        <a href="#galeria.html">Galeria de Trabajo</a>
-        <a>Prueba</a>
-        <a>Prueba</a>
-        <a>Prueba</a>
-        <a>Prueba</a>
+        <a href="{% url 'catalogo' %}">Catalogo</a>
     </nav>
 </header>
 <main>
     <div class="swiper-hero">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <video autoplay loop muted playsinline>
-                    <source src="{% static 'video/Untitled Project 9.mp4'%}" type="video/mp4">
-                </video>
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/seguridad-integral-en-edificios-Banner-blog.webp' %}" alt="Imagen 2">
-            </div>
-            <div class="swiper-slide">
-                <img src="{% static 'img/videoframe_12695.png' %}" alt="Imagen 3">
-            </div>
+        <div class="swiper-slide">
+        <video autoplay loop muted playsinline>
+            <source src="{% static 'video/Untitled Project 9.mp4'%}" type="video/mp4">
+        </video>
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'img/img2.webp' %}" alt="Imagen 2">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'img/img7.png' %}" alt="Imagen 3">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'img/img3.png' %}" alt="Imagen 4">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'img/img4.png' %}" alt="Imagen 5">
+        </div>
+        <div class="swiper-slide">
+            <img src="{% static 'img/img5.jpg' %}" alt="Imagen 6">
+        </div>
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-prev"></div>
@@ -105,10 +108,10 @@
 </main>
 <footer>
         <div class="contact-links">
-        <a href="mailto:contacto@systemseguridadmx.com" class="btn-contacto btn-correo">
+        <a href="mailto:contactosystemseguridad@gmail.com" class="btn-contacto btn-correo">
         <i class="fas fa-envelope"></i>
         <span>Escribenos un Correo!</span></a>
-        <div><a href="https://wa.me/5540012254?text=Hola,%20me%20interesa%20una%20cotización" class="btn-contacto btn-whatsapp"><i class="fab fa-whatsapp"></i><span>Contactanos por WhatsApp</span></a></div>
+        <div><a href="https://wa.me/5642756440?text=Hola,%20me%20interesa%20una%20cotización" class="btn-contacto btn-whatsapp"><i class="fab fa-whatsapp"></i><span>Contactanos por WhatsApp!</span></a></div>
         <div><a href="tel:+525592790985" class="btn-contacto btn-telefono"><i class="fas fa-phone"></i><span>Llamenos!</span></a></div>
         <div><a href="https://maps.app.goo.gl/M1gMu6osNP6oCxVE7" target="_blank" class="btn-mapa"><i class="fas fa-map-marked-alt"></i><span>21 de Marzo 11, Santiaguito, 54900 Tultitlán, Méx.</span></a></div>
     </div>
