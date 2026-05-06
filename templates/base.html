@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}SSMX{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         {% block extra_css %}{% endblock %}
     </head>
@@ -20,8 +21,8 @@
     </nav>
 </header>
     <main>
-        {% block content %}{% endblock %}
-        <section class="seccion-marcas">
+    {% block content %}{% endblock %}
+<section class="seccion-marcas">
     <div class="swiper swiper-marcas">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><a><img src="{% static 'img/marca_accesspro.webp' %}" alt="Logo 1"></a></div>
@@ -49,8 +50,9 @@
             <div class="swiper-slide"><a><img src="{% static 'img/log2_ubiquiti.png' %}" alt="Logo 23"></a></div>
             <div class="swiper-slide"><a><img src="{% static 'img/log2_zkteco.png' %}" alt="Logo 24"></a></div>
             </div>
-        </div>
-    </section>
+    </div>
+<div class="clearfix"></div>
+</section>
 </main>
 <footer class="main-footer">
         <div class="container">
@@ -67,7 +69,8 @@
         </div>
         </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     {% block extra_js %}{% endblock %}
-    </body>
+</body>
 </html>

@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
 {% load static%}
+{% block title %}Catálogo - SSMX{% endblock %}
 {% block content %}
-    <section style="padding: 100px 20px;
-    text-align: center;
-    background-color: #111;
-    color: white;">
-    <h1 style="color: #ffd700;">Catálogo</h1>
-    <p style="color: #ccc;">Explora nuestra amplia gama de soluciones de seguridad para proteger lo que más valoras.</p>
-    <div style="margin-top: 40px;"></div>
-    </section>
+<section class="sobre-nosotros">
+    <h2 class="titulo-seccion">Catálogo de Productos</h2>
+    <div class="divider"></div>
+    <div class="grid-productos">
+        <article class="tarjeta-producto">
+            <div class="img-producto-caja">
+                <img src="{% static 'img/imgcat1.png'%}" alt="Producto 1">
+            </div>
+            <div class="info-producto">
+                <h3>Centro de Inteligencia y Servicios en C-2 y C-4</h3>
+                <p>XD</p>
+            </div>
+        </article>
+        <article class="tarjeta-producto">
+            <div class="img-producto-caja">
+                <img src="{% static 'img/imgcat2.png'%}" alt="Producto 2" >
+            </div>
+            <div class="info-producto">
+                <h3>Servicios de Vigilancia Urbana en C-2 y C-4</h3>
+                <p>Holi</p>
+            </div>
+        </article>
+        <article class="tarjeta-producto">
+            <div class="img-producto-caja">
+                <img src="{% static 'img/imgcat3.png'%}" alt="Producto 3" >
+            </div>
+            <div class="info-producto">
+                <h3>Arco Detector de Placas</h3>
+                <p>Holi</p>
+            </div>
+        </article>  
+    </div>
+</section>
 {% endblock %}
