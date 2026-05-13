@@ -4,7 +4,7 @@ window.onload = function() {
             loop: true,
             observer: true,
             observeParents: true,
-            autoplay: { delay: 4000, disableOnInteraction: false },
+            autoplay: { delay: 4500, disableOnInteraction: false },
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
@@ -98,6 +98,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("modal-imagen");
+    const imgAmpliada = document.getElementById("img-ampliada");
+    const btnCerrar = document.querySelector(".cerrar-modal");
+    const fotosGaleria = document.querySelectorAll(".foto-caso");
+    fotosGaleria.forEach(foto => {
+        foto.addEventListener("click", function() {
+            if(modal && imgAmpliada) {
+                modal.style.display = "flex";
+                imgAmpliada.src = this.src;
+            }
+        });
+    });
+    if (btnCerrar) {
+        btnCerrar.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+    }
+    if (modal) {
+        modal.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
         });
     }
 });
