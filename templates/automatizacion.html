@@ -8,6 +8,11 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'img/favicon/site.webmanifest' %}">
+        <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}">       
         {% block extra_css %}{% endblock %}
     </head>
     <body>
@@ -16,28 +21,90 @@
         <img src="{% static 'img/logo.png'%}"alt="logo" class="logo-img">
         <span class="logo-text">System Seguridad MX</span>
     </a>
-        <nav class="menu">
-        <a href="{% url 'catalogo' %}">Catalogo</a>
-    </nav>
 </header>
     <main>
     {% block content %}{% endblock %}
-    <div class="contenedor-controles">
-        <div class="buscador-wrapper">
-            <i class="fas fa-search"></i>
-            <input type="text" id="inputBuscador" placeholder="Buscar productos...">
+<section class="contenedor-seccion-subcategorias">
+    <h2 class="titulo-seccion" style="text-align: center;">Automatización e Intrusión</h2>
+    <div class="divider"></div>
+    
+    <div class="grid-filtros-video">
+        <button class="tarjeta-filtro-video btn-filtro" data-target="monitoreo">
+            <h3>Sub categoría 1</h3>
+        </button>
+        <button class="tarjeta-filtro-video btn-filtro" data-target="residencial">
+            <h3>Sub categoría 2</h3>
+        </button>
+        <button class="tarjeta-filtro-video btn-filtro" data-target="industrial">
+            <h3>Sub categoría 3</h3>
+        </button>
+    </div>
+</section>
+
+<div class="espacio-grande"></div>
+
+<section id="info-general-categoria" class="detalle-sub">
+    <div class="contenedor-info-categorias">
+        <div class="columna-texto">
+            <b>Objetivo General</b>
+            <p>Implementar un sistema de videovigilancia de vanguardia, que nos permita fortalecer y hacer sentir seguros a nuestros clientes proporcionándoles una herramienta de disuasión criminal, así como la operatividad y mantener la seguridad en el primer cuadro de la ciudad.</p>
+            <br> 
+            <b>Objetivos Específicos</b>
+            <p>Disuadir, prevenir y detectar actos de vandalismo y delictivos en contra de los ciudadanos en el primer cuadro de la ciudad.
+            Supervisar las diversas áreas del primer cuadro de la ciudad durante las 24 horas del día, durante los 365 días del año, para prevenir y detectar en forma oportuna los incidentes que se presenten y que pudieran afectar a los ciudadanos, minimizando en su caso las consecuencias al reaccionar oportunamente.
+            Conservar evidencias de los incidentes ocurridos en el primer cuadro de la ciudad mediante los medios digitales  de almacenamiento, para deslindar responsabilidades o como evidencia de los hechos; analizar los procedimientos de actuación.</p>
+        </div>        
+        <div class="columna-imagen">
+            <img src="{% static 'img/videovigilancia1.jpg' %}" alt="VideoVigilancia">
         </div>
     </div>
-    <article class="grid-productos">
-        {% for producto in productos %}
-        <div class="tarjeta-producto">
-            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="imagen-producto">
-            <h3 class="nombre-producto">{{ producto.nombre }}</h3>
-            <p class="descripcion-producto">{{ producto.descripcion }}</p>
-            <a href="{% url 'detalle_producto' producto.id %}" class="btn-detalle">Ver Detalles</a>
+</section>
+<div id="contenedor-subcategorias">
+    <section id="monitoreo" class="seccion-sub oculta"> 
+        <div class="contenedor-info-categorias espejo">
+            <div class="columna-texto">
+                <h2>Sub categoría 1</h2>
+            <p>Texto prueba 1 - Sub categoría 1</p>
+            </div>
+            <div class="columna-imagen">
+                <img src="{% static 'img/log2_rosslare.png' %}" alt="Centro de Monitoreo">
+            </div>
         </div>
-        {% endfor %}
-    </article>
+    </section>
+    <section id="residencial" class="seccion-sub oculta"> 
+        <div class="contenedor-info-categorias espejo">
+            <div class="columna-texto">
+                <h2>Sub categoría 2</h2>
+                <p>Texto prueba 2 - Sub categoría 2</p>
+            </div>
+            <div class="columna-imagen">
+                <img src="{% static 'img/caso1.jpg' %}" alt="Videovigilancia Residencial">
+            </div>
+        </div>
+    </section>
+    <section id="industrial" class="seccion-sub oculta"> 
+        <div class="contenedor-info-categorias espejo">
+            <div class="columna-texto">
+                <h2>Sub categoría 3</h2>
+                <p>Texto prueba 3 - Sub categoría 3</p>
+            </div>
+            <div class="columna-imagen">
+                <img src="{% static 'img/log2_mimosa.png' %}" alt="Videovigilancia Industrial">
+            </div>
+        </div>
+    </section>
+</div>
+<div class="galeria-casos">
+    <h3>Casos de Éxito</h3>
+    <div class="contenedor-galeria-horizontal">
+        <img src="{% static 'img/caso1.jpg' %}" alt="Caso 1" class="foto-caso" data-categoria="monitoreo">
+        <img src="{% static 'img/caso2.jpg' %}" alt="Caso 2" class="foto-caso" data-categoria="residencial">
+        <img src="{% static 'img/caso3.jpg' %}" alt="Caso 3" class="foto-caso" data-categoria="industrial">
+        <img src="{% static 'img/caso1.jpg' %}" alt="Caso 4" class="foto-caso" data-categoria="monitoreo">
+        <img src="{% static 'img/caso2.jpg' %}" alt="Caso 5" class="foto-caso" data-categoria="residencial">
+        <img src="{% static 'img/caso3.jpg' %}" alt="Caso 6" class="foto-caso" data-categoria="industrial">
+        </div>
+</div>
 <section class="seccion-marcas">
     <div class="swiper swiper-marcas">
         <div class="swiper-wrapper">

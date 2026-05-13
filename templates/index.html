@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>    
     <link rel="stylesheet" href="{% static 'css/style.css'%}"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/favicon/site.webmanifest' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}">
 </head>
 <style>
 </style>
@@ -18,9 +23,6 @@
         <img src="{% static 'img/logo.png'%}"alt="logo" class="logo-img">
         <span class="logo-text">System Seguridad MX</span>
     </a>
-    <nav class="menu">
-        <a href="{% url 'catalogo' %}">Catalogo</a>
-    </nav>
 </header>
 <main>
     <div class="swiper-hero">
@@ -78,37 +80,37 @@
     <h2 class="titulo-seccion" style="text-align: center;">Categorías</h2>
     <div class="divider"></div>
     <div class="grid-categorias">
-        <a href="{% url 'catalogo' %}?cat=redes" class="tarjeta-categoria">
+        <a href="{% url 'audioyvideo' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat1.webp' %}" alt="Audio y Video">
             </div>
             <h3>Audio y Video Profesional</h3>
         </a>
-        <a href="{% url 'catalogo' %}?cat=automatizacion" class="tarjeta-categoria">
+        <a href="{% url 'automatizacion' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat2.webp' %}" alt="Automatización">
             </div>
             <h3>Automatización e Intrusión</h3>
         </a>
-        <a href="{% url 'catalogo' %}?cat=control-acceso" class="tarjeta-categoria">
+        <a href="{% url 'controlacceso' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat3.webp' %}" alt="Control de Acceso">
             </div>
             <h3>Control de Acceso</h3>
         </a>
-        <a href="{% url 'catalogo' %}?cat=radiocomunicacion" class="tarjeta-categoria">
+        <a href="{% url 'radiocomunicacion' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat4.webp' %}" alt="Radiocomunicación">
             </div>
             <h3>Radiocomunicación</h3>
         </a>    
-        <a href="{% url 'catalogo' %}?cat=redes-it" class="tarjeta-categoria">
+        <a href="{% url 'redeseit' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat5.webp' %}" alt="Redes e IT">
             </div>
             <h3>Redes e IT</h3>
         </a>    
-        <a href="{% url 'videovigilancia' %}?cat=videovigilancia" class="tarjeta-categoria">
+        <a href="{% url 'videovigilancia' %}" class="tarjeta-categoria">
             <div class="categoria-icono-caja">
                 <img src="{% static 'img/imgcat6.webp' %}" alt="Video Vigilancia">
             </div>
