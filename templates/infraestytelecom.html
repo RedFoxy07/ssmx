@@ -25,18 +25,18 @@
     <main>
     {% block content %}{% endblock %}
 <section class="contenedor-seccion-subcategorias">
-    <h2 class="titulo-seccion" style="text-align: center;">Audio y Video Profesional</h2>
+    <h2 class="titulo-seccion" style="text-align: center;">Automatización e Intrusión</h2>
     <div class="divider"></div>
     
     <div class="grid-filtros-video">
         <button class="tarjeta-filtro-video btn-filtro" data-target="monitoreo">
-            <h3>Sub categoría 1</h3>
+            <h3>Redes e IT</h3>
         </button>
         <button class="tarjeta-filtro-video btn-filtro" data-target="residencial">
-            <h3>Sub categoría 2</h3>
+            <h3>Radiocomunicación</h3>
         </button>
         <button class="tarjeta-filtro-video btn-filtro" data-target="industrial">
-            <h3>Sub categoría 3</h3>
+            <h3>Audio y video profesional</h3>
         </button>
     </div>
 </section>
@@ -93,21 +93,29 @@
             </div>
         </div>
     </section>
+    <section id="iiiii" class="seccion-sub oculta"> 
+        <div class="contenedor-info-categorias espejo">
+            <div class="columna-texto">
+                <h2>Sub categoría 3</h2>
+                <p>Texto prueba 3 - Sub categoría 3</p>
+            </div>
+            <div class="columna-imagen">
+                <img src="{% static 'img/log2_mimosa.png' %}" alt="Videovigilancia Industrial">
+            </div>
+        </div>
+    </section>
 </div>
 <div class="galeria-casos">
     <h3>Casos de Éxito</h3>
     <div class="contenedor-galeria-horizontal">
-        <img src="{% static 'img/caso1.jpg' %}" alt="Caso 1" class="foto-caso" data-categoria="monitoreo">
-        <img src="{% static 'img/caso2.jpg' %}" alt="Caso 2" class="foto-caso" data-categoria="residencial">
-        <img src="{% static 'img/caso3.jpg' %}" alt="Caso 3" class="foto-caso" data-categoria="industrial">
-        <img src="{% static 'img/caso1.jpg' %}" alt="Caso 4" class="foto-caso" data-categoria="monitoreo">
-        <img src="{% static 'img/caso2.jpg' %}" alt="Caso 5" class="foto-caso" data-categoria="residencial">
-        <img src="{% static 'img/caso3.jpg' %}" alt="Caso 6" class="foto-caso" data-categoria="industrial">
+        <img src="{% static 'img/autoeintru/autoeintru1.jpg' %}" alt="Caso 1" class="foto-caso" data-categoria="monitoreo">
+        <img src="{% static 'img/autoeintru/autoeintru2.jpg' %}" alt="Caso 2" class="foto-caso" data-categoria="residencial">
+        <img src="{% static 'img/autoeintru/autoeintru3.jpg' %}" alt="Caso 3" class="foto-caso" data-categoria="industrial">
         </div>
 </div>
 <section class="seccion-marcas">
     <div class="swiper swiper-marcas">
-               <div class="swiper-wrapper">
+                <div class="swiper-wrapper">
             <div class="swiper-slide"><a><img src="{% static 'img/logos/marca_accesspro.webp' %}" alt="Logo 1"></a></div>
             <div class="swiper-slide"><a><img src="{% static 'img/logos/log_yeastar.png' %}" alt="Logo 2"></a></div>
             <div class="swiper-slide"><a><img src="{% static 'img/logos/log2_allied.png' %}" alt="Logo 3"></a></div>
