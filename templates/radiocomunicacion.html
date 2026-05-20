@@ -25,168 +25,37 @@
     <main>
     {% block content %}{% endblock %}
 <section class="contenedor-seccion-subcategorias">
-    <h2 class="titulo-seccion" style="text-align: center;">Seguridad Electronica</h2>
+    <h2 class="titulo-seccion" style="text-align: center;">Radiocomunicación</h2>
     <div class="divider"></div>
-    
-    <div class="grid-filtros-video">
-        <button class="tarjeta-filtro-video btn-filtro" data-target="videovigilancia">
-            <h3>Videovigilancia</h3>
-        </button>
-        <button class="tarjeta-filtro-video btn-filtro" data-target="controlacceso">
-            <h3>Control de Acceso</h3>
-        </button>
-        <button class="tarjeta-filtro-video btn-filtro" data-target="autoeintru">
-            <h3>Automatización e Intrusión</h3>
-        </button>
-                <button class="tarjeta-filtro-video btn-filtro" data-target="alarmas">
-            <h3>Alarmas</h3>
-        </button>
-    </div>
 </section>
 <div class="espacio-grande"></div>
 <section id="info-general-categoria" class="detalle-sub">
+    
+    <div style="text-align: center; max-width: 900px; margin: 0 auto 50px auto; padding: 0 5%;">
+        <h1 style="color: #ffd700; margin-bottom: 15px;">Comunicación directa e instantánea</h1>
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #ccc;">
+            La radiocomunicación permite una comunicación directa y confiable en tiempo real, esencial para coordinar equipos de trabajo, garantizar la seguridad y operar en lugares donde otras señales fallan.
+        </p>
+    </div>
+
     <div class="contenedor-info-categorias">
         <div class="columna-texto">
-            <h1 style="color: #ffd700">Control absoluto de cualquier situación</h1>
-            <p>Nuestros sistemas de Videovigilancia capturan cada detalle a todo colar incluso en la oscuridad, permitiendo la identificación mas precisa de rostros y behiculos</p>
-            <br> 
-            <h2 style="color: #ffd700";>Tecnología de Vanguardia, HikVision ColorVu</h2>
-            <p><strong>Beneficios:
-                Identificación precisa de colores en total oscuridad
-            </strong></p>
-            <p>Equipamos sensores de 0.0005 Lux para que nunca pierdas el rastro de lo que sucede.</p>    
-        </div>        
-        <div class="columna-imagen">
-            <img src="{% static 'img/seguridadelec/industrial6.jpg' %}" alt="VideoVigilancia">
+            <h2 style="color: #ffd700; font-size: 1.4rem;">Radiocomunicación local</h2>
+            <p><strong>Ideales para:</strong> Empresas de seguridad privada, condominios y fraccionamientos. Eventos y logística, obras de construcción, centros escolares e industriales.</p>
+            
+            <p style="margin-top: 15px;"><strong>Nuestros servicios incluyen:</strong></p>
+            <ul class="lista-caracteristicas" style="list-style: none;">
+                <li>Radios bidireccionales (UHF/VHF)</li>
+                <li>Base fija y móviles</li>
+                <li>Repetidores para ampliar cobertura</li>
+                <li>Antenas y accesorios</li>
+                <li>Programación personalizada de frecuencias</li>
+                <li>Capacitación y soporte técnico</li>
+            </ul>
         </div>
-    </div>
-</section>
-<div id="contenedor-subcategorias"> 
-    <section id="videovigilancia" class="seccion-sub oculta"> 
-        <div class="contenedor-info-categorias espejo">
-            <div class="columna-texto">
-                <h2 style="color: #ffd700; font-size: 1.4ram;">Videovigilancia Residencial</h2>
-                <p>Monitorea en tiempo real y mantén el control total de tu propiedad desde cualquier lugar.</p>
-                <ul class="lista-caracteristicas">
-                    <li><strong>Monitoreo en tiempo real: </strong>Visualiza tus cámaras desde cualquier dispositivo</li>
-                    <li><strong>Alertas Inteligentes: </strong>Notificaciones instántaneas ante cualquier evento</li>
-                    <li><strong>Grabación y almacenamiento: </strong>Respaldo seguro en la nube o en dispositivos locales</li>
-                    <li><strong>Alta Definición: </strong>Imágenes claras para una mejor identificación</li>
-                    <li><strong>Seguridad total: </strong>Cobertura 24/7 para proteger lo que más importa</li>
-                </ul>
-                <p style="margin-top: 25px; font-size: 1.1rem; color: #ccc; line-height: 1.6;">No se trata solo de instalar cámaras, sino de brindarte la tranquilidad de saber que tu familia y tu patrimonio están protegidos, incluso cuando no estás en casa. Nuestro sistema se adapta a las necesidades específicas de tu hogar, garantizando una vigilancia discreta pero implacable.</p>
-                <h3 style="margin-top: 15px;"><strong>¿Listo para convertir tu hogar en el lugar mas seguro?</strong></h3>
-            </div>
-        <div class="columna-imagen"><img src="{% static 'img/seguridadelec/residencial1.jpg' %}" alt="Videovigilancia Residencial"></div>
-    </div>
- <div class="contenedor-info-categorias">
-    <div class="columna-texto">
-        <h2 style="color: #ffd700; font-size: 1.4rem;">Seguridad y Videovigilancia Industrial</h2>
-        <p>Optimiza la operatividad y protege grandes activos con tecnología diseñada para entornos exigentes y condiciones críticas</p>
-        <ul class="lista-caracteristicas" style="direction: rtl;">
-            <li><strong>Resistencia Extrema:</strong> Equipos certificados para soportar polvo, humedad y temperaturas críticas</li>
-            <li><strong>Visión Térmica:</strong> Detección de intrusiones en perímetros extensos incluso en total oscuridad</li>
-            <li><strong>Inteligencia Operativa:</strong> Algoritmos que detectan anomalías en líneas de producción o áreas restringidas</li>
-            <li><strong>Monitoreo Perimetral:</strong> Cobertura de largo alcance para almacenes, fábricas y plantas solares</li>
-            <li><strong>Integración de Procesos:</strong> Supervisión remota que mejora la eficiencia logística y la seguridad laboral</li>
-        </ul>
-        <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.6; color: #ccc;">
-            La seguridad industrial no es solo vigilancia; es la inversión que garantiza la continuidad de tu negocio y la integridad de tu equipo humano frente a cualquier riesgo externo o interno.
-        </p>
-        <h3 style="margin-top: 15px;"><strong>Protección robusta para la infraestructura de tu empresa.</strong></h3>
-    </div>
-    <div class="columna-imagen">
-        <img src="{% static 'img/seguridadelec/industrial1.jpg' %}" alt="Cámaras de vigilancia industrial">
-    </div>
-</div>
-<div class="contenedor-info-categorias espejo">
-    <div class="columna-texto">
-        <h2 style="color: #ffd700; font-size: 1.4rem;">Centros de Monitoreo y CCTV Profesional</h2>
-        <p>El cerebro de tu estrategia de seguridad. Gestión centralizada para una respuesta inmediata y un control absoluto.</p>
-        <ul class="lista-caracteristicas">
-            <li><strong>Video Walls Profesionales:</strong> Visualización simultánea de múltiples puntos críticos con alta definición.</li>
-            <li><strong>Gestión Avanzada (VMS):</strong> Software especializado para la administración inteligente de flujos de video.</li>
-            <li><strong>Almacenamiento Masivo:</strong> Servidores de alta capacidad con redundancia para evitar pérdida de evidencia.</li>
-            <li><strong>Analíticas en Tiempo Real:</strong> Reconocimiento facial, de placas y rastreo automático de objetos.</li>
-            <li><strong>Conectividad Estable:</strong> Infraestructura de red diseñada para una transmisión sin retrasos ni interrupciones.</li>
-        </ul>
-        <p style="margin-top: 20px; font-size: 1.1rem; line-height: 1.6; color: #ccc;">Centralizamos el control de tu entorno para que ninguna situación pase desapercibida. Nuestra tecnología de gestión permite tomar decisiones rápidas y precisas en los momentos más críticos.</p>
-        <h3 style="margin-top: 15px;"><strong>Control total y visibilidad sin fronteras.</strong></h3>
-    </div>
-    <div class="columna-imagen">
-        <img src="{% static 'img/seguridadelec/monitoreo1.jpg' %}" alt="Sala de monitoreo profesional">
-    </div>
-</div>
-    </section>
-    </div>
-<section id="controlacceso" class="seccion-sub oculta"> 
- <div class="contenedor-info-categorias espejo">
-            <div class="columna-texto">
-                <h2 style="color: #ffd700; font-size: 1.4ram;">Control de Acceso</h2>
-                <p>El control de acceso mediante tecnología biométrica facilita la administración segura del ingreso de personas a oficinas, instalaciones, depósitos o áreas con acceso limitado, utilizando herramientas avanzadas como lectura de huellas dactilares, identificación por proximidad o sistema de reconocimento facial </p>
-                <ul class="lista-caracteristicas">
-                    <li><strong>Características:</strong></li>
-                    <li>Identificación ágil y confiable mediante huellas digitales y reconocimiento facial</li>
-                    <li>Soporte para tarjetas de proximidad RFID o tecnología MIFARE</li>
-                    <li>Funcionalidad para control de asistencia y registro de horarios laborales</li>
-                    <li>Admite múltiples perfiles de usuario y niveles de acceso diferenciados</li>
-                    <li>Compatible con sistemas de apertura como torniquetes, cerraduras magnéticas y puertas automáticas</li>
-                    <li>Interffaz táctil intuitiva y plataforma de gestión incluida</li>
-                    <li>Notificación de intentos de acceso faillidos o no autorizados mediante sistema de alerta</li>
-                </ul>
-                </div>
-        <div class="columna-imagen"><img src="{% static 'img/seguridadelec/residencial1.jpg' %}" alt="Videovigilancia Residencial"></div>
-    </div>
-    </section>
-    <section id="autoeintru" class="seccion-sub oculta"> 
-         <div class="contenedor-info-categorias espejo">
-            <div class="columna-texto">
-                <h2 style="color: #ffd700; font-size: 1.4ram;">Porton Electrico</h2>
-                <p>Seguridad, comodidad y tecnología al alcance de un botón. Con nuestros portones eléctricos automáticos, olvídate de bajar del vehículo bajo la lluvia, exponerte en la calle o depender de llaves. Diseñados para uso residencial, comercial e industrial. <strong>Nuestros sistemas de automatización ofrecen apertura y cierre suave, silencioso y completamente seguro</strong></p>
-                <ul class="lista-caracteristicas">
-                    <li><strong>Tipos disponibles: </strong>Corredizo, abatible, batiente, levadizo y seccional</li>
-                    <li><strong>Motor eléctrico de alta potencia: </strong>Con reducción mecánica para movimiento suave y silencioso</li>
-                    <li><strong>Control remoto de largo alcance </strong>(Hasta 50M o Más)</li>
-                    <li><strong>Opciones de apertura: </strong>Control remoto, boton interior, teclado numérico, lector RFID o App Móvil</li>
-                    <li><strong>Sistema de seguridad: </strong>Fotoceldas antiaplastamiento y reversa automática</li>
-                    <li><strong>Cierre automático programable</strong></li>
-                </ul>
-            </div>
-        <div class="columna-imagen"><img src="{% static 'img/seguridadelec/residencial1.jpg' %}" alt="Videovigilancia Residencial"></div>
-    </div>
- <div class="contenedor-info-categorias">
-    <div class="columna-texto">
-        <h2 style="color: #ffd700; font-size: 1.4rem;">Cerco Eléctrico</h2>
-        <p>Es la barrera de protección más efectiva para evitar intrusiones en hogares, negocios y propiedades industriales. Su sistema de alto voltaje disuasivo mantiene alejados a los intrusos y activa una alarma inmediata en caso de intento de corte o manipulación.</p>
-        <p>Instalamos cercos robustos, duraderos y configurados según las necesidadesde cada espacio, garantizando máxima protección día y noche</p>
-        <ul class="lista-caracteristicas" style="direction: rtl;">
-            <li>Alta capacidad de disuasión</li>
-            <li>Activación de alarma ante cortes o sabotaje</li>
-            <li>Bajo consumo de energía</li>
-            <li>Ideal para muros, bardas y perímetros amplios</li>
-            <li>Incrementa la seguridad y reduce intentos de intrusión</li>
-        </ul>
-    </div>
-    <div class="columna-imagen">
-        <img src="{% static 'img/seguridadelec/industrial1.jpg' %}" alt="Cámaras de vigilancia industrial">
-    </div>
-</div>
-    </section>
-       <section id="alarmas" class="seccion-sub oculta"> 
- <div class="contenedor-info-categorias espejo">
-            <div class="columna-texto">
-                <h2 style="color: #ffd700; font-size: 1.4ram;">Alarma Sismica</h2>
-                <p>La alarma sísmica ayuda a brindar seguridad y reacción inmediata ante movimietos telúricos. Nuestro sistema detecta la señal de la alerta oficial y activa un aviso sonoro potente que permite evacuar a tiempo y prevenir riesgos</p>
-                <p>Ideal para hogares, negocios, escuelas y oficinas que buscan reforzar su protocolo de emergencias con tecnología confiable y de fácil instalación. <strong>Mantén a todos seguros con un equipo diseñado para responder en segundos.</strong></p>
-                <ul class="lista-caracteristicas">
-                    <li>Alerta temprana y sonido de alta potencia</li>
-                    <li>Activación automática ante señal oficial</li>
-                    <li>Fácil instalación y mantenimiento</li>
-                    <li>Ideal para cualquier tipo de inmueble</li>
-                    <li>Aporta seguridad y prevención en caso de emergencia</li>
-                </ul>
-            </div>
-        <div class="columna-imagen"><img src="{% static 'img/seguridadelec/residencial1.jpg' %}" alt="Videovigilancia Residencial"></div>
+        <div class="columna-imagen">
+            <img src="{% static 'img/seguridadelec/industrial6.jpg' %}" alt="Radiocomunicación local">
+        </div>
     </div>
     </section>
 <div class="galeria-casos">

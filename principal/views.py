@@ -9,3 +9,5 @@ def infraestytelecom(request):
     return render(request, 'infraestytelecom.html')
 def equipespecializado(request):
     return render(request, 'equipespecializado.html')
+def radiocomunicacion(request):
+    return render(request, 'radiocomunicacion.html')

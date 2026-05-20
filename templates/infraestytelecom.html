@@ -25,15 +25,12 @@
     <main>
     {% block content %}{% endblock %}
 <section class="contenedor-seccion-subcategorias">
-    <h2 class="titulo-seccion" style="text-align: center;">Automatización e Intrusión</h2>
+    <h2 class="titulo-seccion" style="text-align: center;">Infraestructura y Telecomunicación</h2>
     <div class="divider"></div>
     
     <div class="grid-filtros-video">
-        <button class="tarjeta-filtro-video btn-filtro" data-target="monitoreo">
+        <button class="tarjeta-filtro-video btn-filtro" data-target="redeseit">
             <h3>Redes e IT</h3>
-        </button>
-        <button class="tarjeta-filtro-video btn-filtro" data-target="residencial">
-            <h3>Radiocomunicación</h3>
         </button>
         <button class="tarjeta-filtro-video btn-filtro" data-target="industrial">
             <h3>Audio y video profesional</h3>
@@ -60,15 +57,24 @@
     </div>
 </section>
 <div id="contenedor-subcategorias">
-    <section id="monitoreo" class="seccion-sub oculta"> 
+    <section id="redeseit" class="seccion-sub oculta"> 
         <div class="contenedor-info-categorias espejo">
             <div class="columna-texto">
-                <h2>Sub categoría 1</h2>
-            <p>Texto prueba 1 - Sub categoría 1</p>
+                <h2>Enlaces Inalambricos</h2>
+            <p><strong>Conexión sin límites, velocidad sin fronteras</strong></p>
+                    <ul class="lista-caracteristicas">
+                    <li>Alta velocidad de transmisión</li>
+                    <li>Seguridad garantizada</li>
+                    <li>Cobertura extendida</li>
+                    <li>Instalación flexible y rápida</li>
+                    <li>Alta resistencia</li>
+                    <li>Monitoreo remoto</li>
+                </ul>
             </div>
             <div class="columna-imagen">
                 <img src="{% static 'img/log2_rosslare.png' %}" alt="Centro de Monitoreo">
             </div>
+
         </div>
     </section>
     <section id="residencial" class="seccion-sub oculta"> 
