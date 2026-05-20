@@ -13,7 +13,7 @@ window.onload = function() {
     if (document.querySelector('.swiper-marcas')) {
         new Swiper('.swiper-marcas', {
             slidesPerView: 2,
-            spaceBetween: 10,
+            spaceBetween: 20,
             loop: true,
             speed: 8000,
             autoplay: { delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true },
