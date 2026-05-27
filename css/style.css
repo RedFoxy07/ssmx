@@ -710,8 +710,12 @@ footer a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 45px !important;
+    height: 45px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+    flex-shrink: 0 !important;
+    -webkit-apprearance: none !important;
     border-radius: 50%;
     background-color: #2a2a2a;
     color: #ffffff;
@@ -719,6 +723,9 @@ footer a:hover {
     text-decoration: none;
     transition: all 0.3 ease;
     border: 1px solid #444444;
+}
+.icono-red i{
+    font-size: 1.2rem !important;
 }
 .texto-redes{
     color: #ffffff;
