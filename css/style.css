@@ -298,6 +298,15 @@ header {
     object-fit: contain;
     margin-bottom: 20px;
 }
+@media (max-width: 468px){
+    .tarjeta-socio {
+        padding: 20px;
+    }
+    .tarjeta-socio img {
+        height: 120px !important;
+        margin-bottom: 15px !important;
+    }
+}
 .tarjeta-socio:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
