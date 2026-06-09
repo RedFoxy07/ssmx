@@ -423,13 +423,45 @@ footer a:hover {
     color: white;
     text-decoration: underline;
 }
-.contenedor-info-categorias{
-    max-width: 1400px;
+/* =========================================
+   CONTENEDOR DE INFORMACIÓN (ESTILO PANEL)
+========================================= */
+.contenedor-info-categorias {
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-left: 4px solid #ffd700;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+
     display: flex;
-    margin: 50px auto;
-    flex-direction: row;
-    gap: 1px; /*espacio texto-foto*/
-    width: 95%;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+}
+
+.contenedor-info-categorias.espejo {
+    border-left: none;
+    border-right: 4px solid #ffd700;
+}
+
+.columna-texto {
+    flex: 1;
+    min-width: 300px; /* Para que en celulares no se aplaste */
+}
+
+.columna-imagen {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.columna-imagen img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #333;
 }
 .columna-texto{
     flex: 1;
@@ -508,50 +540,38 @@ footer a:hover {
     margin-top: 50px;
 }
 .grid-filtros-video {
-    display: flex; 
+    display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     gap: 15px;
     padding: 20px;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .grid-filtros-video {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 15px 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
 .tarjeta-filtro-video {
     flex: 1;
-    background-color: #1a1a1a; 
-    border: 1px solid #777; 
+    background-color: #1a1a1a;
+    border: 1px solid #777;
     border-radius: 8px;
     padding: 20px 30px;
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease;
-    min-width: 120px; 
+    min-width: 120px;
     max-width: 250px;
     white-space: nowrap;
+    position: relative;
 }
-@media (max-width: 768px) {
-    .contenedor-filtros {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px;
-        padding: 15px 10px;
-        width: 100%;
-        box-sizing: border-box !important;
-    }
-    .tarjeta-filtro-video {
-        width: 100% !important;
-        min-width: 0 !important;
-        margin: 0 !important;
-        padding: 10px 5px;
-        font-size: 0.85rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        white-space: normal !important;
-        line-height: 1.2;
-    }
-}
-/* El texto dentro del botón */
 .tarjeta-filtro-video h3 {
     color: #fff;
     font-size: 1rem;
@@ -559,19 +579,44 @@ footer a:hover {
     pointer-events: none;
 }
 
-.tarjeta-filtro-video:hover, 
+.tarjeta-filtro-video:hover,
 .tarjeta-filtro-video.active {
-    border-color: #ffd700; /* Borde dorado */
+    border-color: #ffd700;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    transform: scale(1.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tarjeta-filtro-video.active h3 {
     color: #ffd700;
 }
 .oculta {
-    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: translateY(-30px);
+    pointer-events: none;
 }
-/*subcategorias*/
+
+.seccion-sub {
+    max-height: 5000px;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: translateY(0);
+    pointer-events: auto;
+    margin-top: -12px;
+    padding-top: 8px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+#contenedor-subcategorias {
+    margin-top: 50px;
+}
 .contenedor-info-categorias.espejo {
     flex-direction: row-reverse;
 }
@@ -754,4 +799,70 @@ footer a:hover {
 .icono-red.telefono:hover{
     background-color: #206eff;
     border-color: #206eff;
+}
+/* =========================================
+   ESTILOS DEL BOTÓN EXPANDIBLE
+========================================= */
+/* =========================================
+   CONTENEDOR DE LOS BOTONES (EVITA QUE SE ESTIREN)
+========================================= */
+.seccion-acordeones {
+    padding: 40px 20px; 
+}
+.contenedor-botones-centrados {
+    max-width: 800px; 
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+.boton-categoria {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #1a1a1a; /* Pon el color que combine con SSMX */
+    color: #ffd700; /* El mismo dorado de tus títulos */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    border: 2px solid #ffd700; /* Un borde dorado para que resalte */
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    margin-bottom: 10px; /* Separación de la caja de abajo */
+}
+
+.boton-categoria:hover {
+    background-color: #ffd700;
+    color: #000;
+}
+
+/* =========================================
+   ESTILOS DE LA CAJA OCULTA
+========================================= */
+.contenido-oculto {
+    max-height: 0; /* Inicia cerrado */
+    overflow: hidden; /* Oculta lo que se desborde */
+    transition: max-height 0.5s ease-out; /* La animación fluida */
+}
+/* =========================================
+   ANIMACIÓN SUAVE PARA LAS PESTAÑAS
+========================================= */
+
+/* 1. Creamos la animación (aparecer y subir ligeramente) */
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Empieza 20px más abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición original */
+    }
+}
+
+.seccion-filtrada {
+    animation: aparecerSuave 0.5s ease-out forwards;
 }

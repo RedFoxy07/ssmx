@@ -70,32 +70,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const seccionesSub = document.querySelectorAll('.seccion-sub');
     const infoGeneral = document.getElementById('info-general-categoria');
     const fotosCasos = document.querySelectorAll('.foto-caso');
+    let animandose = false;
 
     if (botonesFiltro.length > 0) {
         botonesFiltro.forEach(boton => {
             boton.addEventListener('click', () => {
+                if (animandose) return;
+
                 const objetivo = boton.getAttribute('data-target');
-                if (boton.classList.contains('active')) {
+                const estaActivo = boton.classList.contains('active');
+
+                if (estaActivo) {
+                    // Cerrar: volver a mostrar info general
+                    animandose = true;
                     boton.classList.remove('active');
-                    if (infoGeneral) infoGeneral.style.display = '';
                     seccionesSub.forEach(s => s.classList.add('oculta'));
-                    fotosCasos.forEach(foto => foto.style.display = 'block');
-                } 
-                else {
-                    if (infoGeneral) infoGeneral.style.display = 'none';
-                    botonesFiltro.forEach(b => b.classList.remove('active'));
-                    boton.classList.add('active');
-                    seccionesSub.forEach(seccion => {
-                        if (seccion.id === objetivo) {
-                            seccion.classList.remove('oculta');
-                        } else {
-                            seccion.classList.add('oculta');
-                        }
-                    });
-                    fotosCasos.forEach(foto => {
-                        const catFoto = foto.getAttribute('data-categoria');
-                        foto.style.display = (catFoto === objetivo) ? 'block' : 'none';
-                    });
+
+                    setTimeout(() => {
+                        if (infoGeneral) infoGeneral.style.display = '';
+                        fotosCasos.forEach(foto => foto.style.display = 'block');
+                        animandose = false;
+                    }, 500);
+                } else {
+                    // Abrir: mostrar sección específica
+                    animandose = true;
+
+                    // Primero cerrar la sección anterior
+                    const seccionActual = document.querySelector('.seccion-sub:not(.oculta)');
+                    if (seccionActual) {
+                        seccionActual.classList.add('oculta');
+                    }
+
+                    // Esperar a que termine la transición de cierre
+                    setTimeout(() => {
+                        if (infoGeneral) infoGeneral.style.display = 'none';
+                        botonesFiltro.forEach(b => b.classList.remove('active'));
+                        boton.classList.add('active');
+
+                        // Ahora abrir la nueva sección
+                        seccionesSub.forEach(seccion => {
+                            if (seccion.id === objetivo) {
+                                seccion.classList.remove('oculta');
+                            } else {
+                                seccion.classList.add('oculta');
+                            }
+                        });
+
+                        fotosCasos.forEach(foto => {
+                            const catFoto = foto.getAttribute('data-categoria');
+                            foto.style.display = (catFoto === objetivo) ? 'block' : 'none';
+                        });
+
+                        animandose = false;
+                    }, 500);
                 }
             });
         });
@@ -127,3 +154,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+    // Esperamos a que todo el HTML esté cargado en la pantalla
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const botones = document.querySelectorAll('.boton-categoria');
+
+        // Usamos la función clásica en lugar de la flecha (=>) para evitar errores en ciertos editores
+        botones.forEach(function(boton) {
+            boton.addEventListener('click', function() {
+                
+                const contenido = this.nextElementSibling;
+                const icono = this.querySelector('.icono');
+
+                if (contenido.style.maxHeight) {
+                    // Cerrar
+                    contenido.style.maxHeight = null;
+                    icono.textContent = '+';
+                } else {
+                    // Abrir
+                    contenido.style.maxHeight = contenido.scrollHeight + "px";
+                    icono.textContent = '-';
+                }
+            });
+        });
+    
+    });
