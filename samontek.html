@@ -1,251 +1,93 @@
-<!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>SAMONTEK | Socio Comercial</title>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "secondary-fixed-dim": "#e9c349",
-                        "on-secondary-fixed-variant": "#574500",
-                        "inverse-primary": "#9fccef",
-                        "surface-tint": "#356382",
-                        "on-surface-variant": "#41474d",
-                        "on-tertiary": "#ffffff",
-                        "error-container": "#ffdad6",
-                        "surface": "#f7f9fb",
-                        "surface-container-lowest": "#ffffff",
-                        "on-secondary-container": "#745c00",
-                        "error": "#ba1a1a",
-                        "secondary-container": "#fed65b",
-                        "surface-variant": "#e0e3e5",
-                        "surface-container-highest": "#e0e3e5",
-                        "secondary": "#735c00",
-                        "primary-container": "#1b4d6b",
-                        "outline": "#72787e",
-                        "primary-fixed": "#c9e6ff",
-                        "on-surface": "#191c1e",
-                        "surface-container": "#eceef0",
-                        "inverse-surface": "#2d3133",
-                        "primary-fixed-dim": "#9fccef",
-                        "on-primary-fixed": "#001e2f",
-                        "on-primary-container": "#90bde0",
-                        "outline-variant": "#c1c7ce",
-                        "on-error-container": "#93000a",
-                        "primary": "#003650",
-                        "tertiary-fixed": "#d8e3fa",
-                        "on-primary-fixed-variant": "#184b69",
-                        "surface-dim": "#d8dadc",
-                        "background": "#f7f9fb",
-                        "on-background": "#191c1e",
-                        "on-tertiary-fixed": "#111c2c",
-                        "on-secondary": "#ffffff",
-                        "on-tertiary-fixed-variant": "#3c475a",
-                        "surface-bright": "#f7f9fb",
-                        "secondary-fixed": "#ffe088",
-                        "surface-container-high": "#e6e8ea",
-                        "on-tertiary-container": "#adb8ce",
-                        "tertiary-container": "#3e495c",
-                        "on-error": "#ffffff",
-                        "tertiary-fixed-dim": "#bcc7dd",
-                        "surface-container-low": "#f2f4f6",
-                        "tertiary": "#283344",
-                        "on-secondary-fixed": "#241a00",
-                        "inverse-on-surface": "#eff1f3",
-                        "on-primary": "#ffffff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "max-width": "1280px",
-                        "margin-desktop": "64px",
-                        "gutter": "24px",
-                        "base": "8px",
-                        "margin-mobile": "16px"
-                    },
-                    "fontFamily": {
-                        "headline-xl": ["IBM Plex Sans"],
-                        "label-lg": ["IBM Plex Sans"],
-                        "body-md": ["IBM Plex Sans"],
-                        "headline-sm": ["IBM Plex Sans"],
-                        "headline-md": ["IBM Plex Sans"],
-                        "label-md": ["IBM Plex Sans"],
-                        "body-lg": ["IBM Plex Sans"],
-                        "body-sm": ["IBM Plex Sans"],
-                        "headline-lg-mobile": ["IBM Plex Sans"],
-                        "headline-lg": ["IBM Plex Sans"]
-                    },
-                    "fontSize": {
-                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "label-lg": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        /* Custom Utilities for Industrial Aesthetic */
-        .industrial-border {
-            border: 1px solid theme('colors.outline-variant');
-        }
-        .industrial-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 54, 80, 0.15), 0 2px 4px -1px rgba(0, 54, 80, 0.06);
-        }
-        .inset-border-active:active {
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-            transform: translateY(1px);
-        }
-    </style>
-</head>
-<body class="bg-background text-on-background antialiased font-body-md text-body-md flex flex-col min-h-screen">
-<!-- TopAppBar (Logo Only as requested) -->
-<header class="bg-surface-container-lowest full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
-<div class="flex items-center gap-base">
-<span class="material-symbols-outlined text-primary text-[32px]" data-icon="precision_manufacturing">precision_manufacturing</span>
-<span class="text-headline-sm font-headline-sm font-bold text-primary">SAMONTEK | System Seguridad MX</span>
-</div>
-<!-- No navigation menu here -->
-</header>
-<!-- Main Content Canvas -->
-<main class="flex-grow">
-<!-- Hero Section -->
-<section class="relative w-full h-[600px] flex items-center bg-surface-container-high border-b border-outline-variant" data-alt="A sprawling, active industrial metal fabrication floor viewed from a slight elevated angle. Heavy steel I-beams are being maneuvered by an overhead gantry crane. In the foreground, a welder in full protective gear works on a massive structural joint, sending a shower of bright white-blue sparks against the dark, heavy machinery. The overall mood is powerful, structural, and professional, bathed in cool industrial lighting and strong shadows, fitting the corporate structural engineering visual style." style="background-image: linear-gradient(rgba(0, 54, 80, 0.8), rgba(0, 54, 80, 0.8)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCu8M0djFt7iG-nuVgxeGh6WoSpnwo9JGCMl83R1kupC955ZgYgBW7SHvqucEk0f53RmQunShKmzB23wvXk99T-zPRfzI0tiOy1ZprVrkCNU1uXrnaIwWo2tdpM3nDxeo1qU-1rmephqNfYpfOGbBm6oIekFGqnSSnJDu2RVrVzTqJhoK8c0-JlpIRWUP24jLvjnDpbgvkRFRbBy2rDPd8A555H1SK9vRBA4SEwWn9llVqdBa36-6haubxQpZEXWB0-uTHK0olfrM62'); background-size: cover; background-position: center;">
-<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop w-full relative z-10">
-<div class="max-w-2xl text-on-primary">
-<span class="inline-block px-3 py-1 bg-secondary-fixed-dim text-on-secondary-fixed-variant text-label-md font-label-md uppercase tracking-wider mb-4 rounded-sm industrial-border border-secondary-container">Ingeniería Estructural</span>
-<h1 class="text-headline-xl font-headline-xl mb-6">Fabricación y Montajes Metálicos</h1>
-<p class="text-body-lg font-body-lg mb-8 text-on-primary-container">Precisión industrial y rigor técnico para proyectos de infraestructura pesada. Soluciones definitivas en acero estructural, respaldadas por estándares normativos internacionales.</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samontek</title>
+    <link rel="stylesheet" href="css/samontek.css">
 
-</div>
-</div>
+<header>
+    <a href="samontek.html" class="logo-container">
+        <img src="img/logos/samontek-logo.png"alt="logo" class="logo-img">
+        <span class="logo-text">Samontek</span>
+    </a>
+</header>
+<body>
+    <main>
+        <section class="seccion-nosotros-blanca">
+    <div class="grid-nosotros-blanco">
+        
+        <div class="tarjeta-blanca">
+            <div class="tarjeta-blanca-header">
+                <i class="fas fa-drafting-compass"></i>
+                <h3>Diseño Estructural</h3>
+            </div>
+            <div class="tarjeta-blanca-body">
+                <p>Cálculo y modelado 3D de estructuras metálicas para naves industriales y puentes, garantizando resistencia y optimización de materiales.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta-blanca">
+            <div class="tarjeta-blanca-header">
+                <i class="fas fa-tools"></i>
+                <h3>Corte y Soldadura</h3>
+            </div>
+            <div class="tarjeta-blanca-body">
+                <p>Procesos de oxicorte, plasma CNC y soldadura certificada (SMAW, GMAW, FCAW) para uniones estructurales de alta integridad.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta-blanca">
+            <div class="tarjeta-blanca-header">
+                <i class="fas fa-paint-roller"></i>
+                <h3>Recubrimientos</h3>
+            </div>
+            <div class="tarjeta-blanca-body">
+                <p>Aplicación de sistemas anticorrosivos, pintura epóxica y poliuretano bajo estándares SSPC para máxima durabilidad en ambientes agresivos.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta-blanca">
+            <div class="tarjeta-blanca-header">
+                <i class="fas fa-truck-pickup"></i>
+                <h3>Montaje con Grúa</h3>
+            </div>
+            <div class="tarjeta-blanca-body">
+                <p>Izaje y ensamblaje en sitio mediante equipos pesados, siguiendo estrictos protocolos de maniobra y amarre para garantizar la seguridad.</p>
+            </div>
+        </div>
+
+        <div class="tarjeta-blanca">
+            <div class="tarjeta-blanca-header">
+                <i class="fas fa-hard-hat"></i>
+                <h3>Supervisión Técnica</h3>
+            </div>
+            <div class="tarjeta-blanca-body">
+                <p>Control de calidad en campo, inspección visual y ensayos no destructivos (END) para validar la correcta ejecución del montaje.</p>
+            </div>
+        </div>
+
+    </div>
 </section>
-<!-- Services Section (Bento Grid Style) -->
-<section class="py-20 bg-surface">
-<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="mb-12 border-b border-outline-variant pb-4">
-<h2 class="text-headline-md font-headline-md text-primary">Capacidades Técnicas</h2>
-<p class="text-body-md text-on-surface-variant mt-2">Áreas de especialización en metalmecánica y estructuras.</p>
+    <div class="galeria-casos">
+    <h3>Casos de Éxito</h3>
+    <div class="contenedor-galeria-horizontal">
+        <img src="img/radiocomunicacion/radiocomunicacion1.jpg" loading="lazy" alt="Caso 1" class="foto-caso" data-categoria="videovigilancia">
+        <img src="img/radiocomunicacion/radiocomunicacion2.jpg" loading="lazy" alt="Caso 2" class="foto-caso" data-categoria="videovigilancia">
+        <img src="img/radiocomunicacion/radiocomunicacion3.jpg" loading="lazy" alt="Caso 3" class="foto-caso" data-categoria="videovigilancia">
+        <img src="img/radiocomunicacion/radiocomunicacion4.jpg" loading="lazy" alt="Caso 4" class="foto-caso" data-categoria="videovigilancia">
+        <img src="img/radiocomunicacion/radiocomunicacion5.jpg" loading="lazy" alt="Caso 5" class="foto-caso" data-categoria="videovigilancia">
+        <img src="img/radiocomunicacion/radiocomunicacion6.jpg" loading="lazy" alt="Caso 6" class="foto-caso">
+    </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-<!-- Service 1 -->
-<div class="bg-surface-container-lowest industrial-border rounded-DEFAULT overflow-hidden group">
-<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
-<h3 class="text-label-lg font-label-lg text-primary uppercase">Diseño estructural</h3>
-</div>
-<div class="p-6">
-<p class="text-body-sm font-body-sm text-on-surface-variant">Cálculo y modelado 3D de estructuras metálicas para naves industriales y puentes, garantizando resistencia y optimización de materiales.</p>
-</div>
-</div>
-<!-- Service 2 -->
-<div class="bg-surface-container-lowest industrial-border rounded-DEFAULT overflow-hidden group">
-<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="construction">construction</span>
-<h3 class="text-label-lg font-label-lg text-primary uppercase">Corte y soldadura</h3>
-</div>
-<div class="p-6">
-<p class="text-body-sm font-body-sm text-on-surface-variant">Procesos de oxicorte, plasma CNC y soldadura certificada (SMAW, GMAW, FCAW) para uniones estructurales de alta integridad.</p>
-</div>
-</div>
-<!-- Service 3 -->
-<div class="bg-surface-container-lowest industrial-border rounded-DEFAULT overflow-hidden group">
-<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="format_paint">format_paint</span>
-<h3 class="text-label-lg font-label-lg text-primary uppercase">Recubrimientos</h3>
-</div>
-<div class="p-6">
-<p class="text-body-sm font-body-sm text-on-surface-variant">Aplicación de sistemas anticorrosivos, pintura epóxica y poliuretano bajo estándares SSPC para máxima durabilidad en ambientes agresivos.</p>
-</div>
-</div>
-<!-- Service 4 -->
-<div class="bg-surface-container-lowest industrial-border rounded-DEFAULT overflow-hidden group">
-<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="crane">cake</span>
-<h3 class="text-label-lg font-label-lg text-primary uppercase">Montaje con grúa</h3>
-</div>
-<div class="p-6">
-<p class="text-body-sm font-body-sm text-on-surface-variant">Izaje y ensamblaje en sitio mediante equipos pesados, siguiendo estrictos protocolos de maniobra y amarre para garantizar la seguridad.</p>
-</div>
-</div>
-<!-- Service 5 -->
-<div class="bg-surface-container-lowest industrial-border rounded-DEFAULT overflow-hidden group">
-<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center gap-3">
-<span class="material-symbols-outlined text-primary" data-icon="engineering">engineering</span>
-<h3 class="text-label-lg font-label-lg text-primary uppercase">Supervisión técnica</h3>
-</div>
-<div class="p-6">
-<p class="text-body-sm font-body-sm text-on-surface-variant">Control de calidad en campo, inspección visual y ensayos no destructivos (END) para validar la correcta ejecución del montaje.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Portfolio Section -->
-<section class="py-20 bg-surface-container-low border-y border-outline-variant">
-<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-<div class="lg:col-span-5">
-<span class="inline-block px-3 py-1 bg-surface-variant text-on-surface-variant text-label-md font-label-md uppercase tracking-wider mb-4 rounded-sm industrial-border">Proyecto Destacado</span>
-<h2 class="text-headline-lg font-headline-lg text-primary mb-4">Plataforma Logística Norte</h2>
-<p class="text-body-lg font-body-lg text-on-surface-variant mb-6">Montaje de estructura metálica de más de 500 toneladas para centro de distribución automatizado. El proyecto requirió precisión milimétrica en la alineación de columnas y vigas para soportar el sistema de rieles robóticos.</p>
-<div class="space-y-4 mb-8">
-<div class="flex items-center gap-4 border-b border-outline-variant pb-2">
-<span class="material-symbols-outlined text-outline" data-icon="straighten">straighten</span>
-<span class="text-label-lg font-label-lg text-on-surface">Superficie Total:</span>
-<span class="text-body-md font-body-md text-on-surface-variant ml-auto">12,500 m²</span>
-</div>
-<div class="flex items-center gap-4 border-b border-outline-variant pb-2">
-<span class="material-symbols-outlined text-outline" data-icon="weight">weight</span>
-<span class="text-label-lg font-label-lg text-on-surface">Acero Estructural:</span>
-<span class="text-body-md font-body-md text-on-surface-variant ml-auto">520 Toneladas</span>
-</div>
-<div class="flex items-center gap-4 border-b border-outline-variant pb-2">
-<span class="material-symbols-outlined text-outline" data-icon="event">event</span>
-<span class="text-label-lg font-label-lg text-on-surface">Tiempo de Ejecución:</span>
-<span class="text-body-md font-body-md text-on-surface-variant ml-auto">14 Semanas</span>
-</div>
-</div>
-</div>
-<div class="lg:col-span-7">
-<div class="bg-surface-container-lowest p-2 industrial-border rounded-DEFAULT industrial-shadow">
-<img alt="Proyecto Plataforma Logística Norte" class="w-full h-auto object-cover rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3M1PS61_oX9HEuGFyQzlkp6sxiMQt9IdZT4MhaniD5QfhjOWLT-5jGkzyZMM01O9Sc8KGr_OUfZgQ4sUkPXWnJpeuH6eTg6FHQaBpbliTy_av6a4ve5_VeBrLRok8dUjlJ2df2H1yo8H9v53axMcIYulEy4sGqUB2qZD50N-4Q3u4ZH3FZpUvl9Of9Rht9VOThyBR9vYydA40am863Nm_rorO7B0dvIeZq8DB3l9ENw78DlB1ikaU7ZpnCZpmPSD87AMEd3k8aHbr">
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-primary full-width bottom-0 border-t border-primary-container w-full py-8 px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 items-center gap-gutter text-body-sm font-body-sm text-on-primary">
-<div>
-<span class="text-label-lg font-label-lg uppercase tracking-wider text-secondary-fixed">SAMONTEK</span>
-</div>
-<div class="md:text-right">
-<span class="text-primary-fixed-dim opacity-80">© 2024 SAMONTEK &amp; System Seguridad MX. Todos los derechos reservados.</span>
-</div>
+    </main>
+    <footer>
+    &copy; Todos los Derechos Reservados - SAMONTEK 2026
 </footer>
-</body></html>
+<div id="modal-imagen" class="modal-oculto">
+    <span class="cerrar-modal">&times;</span>
+    <img class="modal-contenido" id="img-ampliada" alt="Caso de exito ampliado">
+</div>
+</body>
+<script src="js/main.js"></script>
+</html>

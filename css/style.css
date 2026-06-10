@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +11,21 @@ html, body {
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
 }
-
+h1, h2, h3, h4, .boton-categoria {
+    font-family: 'Poppins', sans-serif;
+}
+p, li {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+    color: #f8f8f8;
+}
+.lista-caracteristicas {
+    margin-bottom: 15px;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -237,7 +252,7 @@ header {
 }
 
 .tarjeta-nosotros {
-    background-color: #1a1a1a;
+    background-color: #121212;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #333;
@@ -270,7 +285,7 @@ header {
       Seccion de socios
 ============================================*/
 .seccion-socios{
-    background-color: #111;
+    background-color: #121212;
     padding: 60px max(5%, 15px);
     text-align: center;
     margin-top: 70px;
@@ -283,7 +298,7 @@ header {
     width: 100%;
 }
 .tarjeta-socio{
-    background-color: #1a1a1a;
+    background-color: #121212;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #333;
@@ -291,6 +306,40 @@ header {
     width: 350px;
     max-width: 100%;
     box-sizing: border-box;
+}
+.tarjeta-socio.lojifra {
+    background: linear-gradient(to bottom, rgba(85, 140, 158, 0.25) 0%, #1a1a1a 50%);
+    border-color: rgba(85, 140, 158, 0.3);
+}
+.tarjeta-socio.uct {
+    background: linear-gradient(to bottom, rgba(210, 18, 30, 0.20) 0%, #1a1a1a 50%);
+    border-color: rgba(210, 18, 30, 0.3);
+}
+.tarjeta-socio.style-beauty {
+    background: linear-gradient(to bottom, rgba(106, 55, 31, 0.25) 0%, #1a1a1a 50%);
+    border-color: rgba(106, 55, 31, 0.3);
+}
+.tarjeta-socio.samontek {
+    background: linear-gradient(to bottom, rgba(0, 88, 129, 0.25) 0%, #1a1a1a 50%);
+    border-color: rgba(0, 88, 129, 0.3);
+}
+@media (hover: hover) {
+    .tarjeta-socio.lojifra:hover {
+        box-shadow: 0 10px 20px rgba(85, 140, 158, 0.3);
+        border-color: #558C9E;
+    }
+    .tarjeta-socio.uct:hover {
+        box-shadow: 0 10px 20px rgba(210, 18, 30, 0.3);
+        border-color: #D2121E;
+    }
+    .tarjeta-socio.style-beauty:hover {
+        box-shadow: 0 10px 20px rgba(106, 55, 31, 0.3);
+        border-color: #6A371F;
+    }
+    .tarjeta-socio.samontek:hover {
+        box-shadow: 0 10px 20px rgba(0, 88, 129, 0.3);
+        border-color: #005881;
+    }
 }
 .tarjeta-socio img{
     width: 100%;
@@ -363,8 +412,8 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 25px;
-    background: #1a1a1a;
-    border: 1px solid #aaaaaa;
+    background: #121212;
+    border: 1px solid #333333;
     border-radius: 12px;
     text-decoration: none;
     transition: 0.3s;
@@ -404,7 +453,7 @@ header {
    9. FOOTER
 ========================================= */
 footer {
-    background-color: #1a1a1a;
+    background-color: #121212;
     width: 100%;
     padding: 20px 0;
     text-align: center;
@@ -602,7 +651,7 @@ footer a:hover {
 
 .seccion-sub {
     max-height: 5000px;
-    overflow: hidden;
+    overflow: visible;
     opacity: 1;
     visibility: visible;
     transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -612,6 +661,30 @@ footer a:hover {
     padding-top: 8px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     position: relative;
+}
+
+@media (max-width: 768px) {
+    .seccion-sub {
+        max-height: none;
+        overflow: visible;
+        margin-top: 0;
+        padding-top: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .contenedor-info-categorias {
+        gap: 20px !important;
+        padding: 20px 15px !important;
+    }
+
+    .columna-texto {
+        min-width: auto !important;
+    }
+
+    .columna-imagen {
+        min-width: auto !important;
+        max-width: 100% !important;
+    }
 }
 
 #contenedor-subcategorias {
@@ -800,12 +873,6 @@ footer a:hover {
     background-color: #206eff;
     border-color: #206eff;
 }
-/* =========================================
-   ESTILOS DEL BOTÓN EXPANDIBLE
-========================================= */
-/* =========================================
-   CONTENEDOR DE LOS BOTONES (EVITA QUE SE ESTIREN)
-========================================= */
 .seccion-acordeones {
     padding: 40px 20px; 
 }
@@ -819,19 +886,19 @@ footer a:hover {
 .boton-categoria {
     width: 100%;
     padding: 15px 20px;
-    background-color: #1a1a1a; /* Pon el color que combine con SSMX */
-    color: #ffd700; /* El mismo dorado de tus títulos */
+    background-color: #121212; 
+    color: #ffd700;
     font-size: 20px;
     font-weight: bold;
     text-align: left;
-    border: 2px solid #ffd700; /* Un borde dorado para que resalte */
+    border: 2px solid #ffd700;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
-    margin-bottom: 10px; /* Separación de la caja de abajo */
+    margin-bottom: 10px;
 }
 
 .boton-categoria:hover {
@@ -839,27 +906,20 @@ footer a:hover {
     color: #000;
 }
 
-/* =========================================
-   ESTILOS DE LA CAJA OCULTA
-========================================= */
 .contenido-oculto {
-    max-height: 0; /* Inicia cerrado */
-    overflow: hidden; /* Oculta lo que se desborde */
-    transition: max-height 0.5s ease-out; /* La animación fluida */
+    max-height: 0;
+    overflow: hidden; 
+    transition: max-height 0.5s ease-out; 
 }
-/* =========================================
-   ANIMACIÓN SUAVE PARA LAS PESTAÑAS
-========================================= */
 
-/* 1. Creamos la animación (aparecer y subir ligeramente) */
 @keyframes aparecerSuave {
     from {
         opacity: 0;
-        transform: translateY(20px); /* Empieza 20px más abajo */
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0); /* Termina en su posición original */
+        transform: translateY(0); 
     }
 }
 
