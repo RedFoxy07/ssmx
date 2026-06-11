@@ -77,148 +77,42 @@ footer a:hover {
     background-image: linear-gradient(rgba(0, 25, 40, 0.8), rgba(0, 35, 55, 0.9)), url('../img/samontek/samontek-hero.jpeg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; 
     border-bottom: 2px solid #1b4d6b;
     padding: 0 5%;
-}
-.contenedor-galeria-horizontal{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 15px;
-    justify-content: center;
-    width: 100%;
-    margin-top: 50px;
-}
-.contenedor-galeria-horizontal img{
-    width: calc(20% - 15px);
-    min-width: 150px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #1b4d6b;
-    transition: 0.3s;
-}
-
-@media (max-width: 600px) {
-    .contenedor-galeria-horizontal {
-        flex-direction: column;
-    }
-}
-.galeria-casos {
-    background-color: #1b4d6b; 
-    padding: 40px 5%;
-    text-align: center;
-    margin-top: 50px;
-}
-.grid-filtros-video {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    .grid-filtros-video {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-        padding: 15px 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-}
-.tarjeta-filtro-video {
-    flex: 1;
-    background-color: #1a1a1a;
-    border: 1px solid #777;
-    border-radius: 8px;
-    padding: 20px 30px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-    min-width: 120px;
-    max-width: 250px;
-    white-space: nowrap;
-    position: relative;
-}
-.tarjeta-filtro-video h3 {
-    color: #fff;
-    font-size: 1rem;
-    margin: 0;
-    pointer-events: none;
-}
-
-.tarjeta-filtro-video:hover,
-.tarjeta-filtro-video.active {
-    border-color: #ffd700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-    transform: scale(1.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.tarjeta-filtro-video.active h3 {
-    color: #ffd700;
-}
-/* Estilos Modal */
-.modal-oculto{
-    display: none;
-    position: fixed !important;
-    z-index: 9999 !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-color: rgba(0, 0, 0, 0.9) !important;
-    justify-content: center !important;
-    align-items: center !important;
-    transition: opacity 0.4 ease;
-}
-.modal-contenido{
-    max-width: 90%;
-    max-height: 85vh;
-    object-fit: contain !important;
-    border: 2px solid #1b4d6b;
-    border-radius: 8px !important;
-    margin: 0 auto !important;
-    animation: zoom 0.3s;
-}
-@keyframes zoom {
-    from{transform: scale(0.7);}
-    to{transform: scale(1);}
-}
-.cerrar-modal{
-    position: absolute !important;
-    top: 20px;
-    right: 40px;
-    color: #1b4d6b;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 100000 !important;
 }
 .nosotros-hero {
     position: relative;
     margin-top: 25px;
-    padding: 60px 5%;
     width: 100%;
     height: 60vh;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
+    min-height: auto;
     background-image: linear-gradient(rgba(0, 25, 40, 0.8), rgba(0, 35, 55, 0.9)), url('../img/samontek/samontek-hero2.jpeg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     border-bottom: 2px solid #1b4d6b;
-    padding: 0 5%;
+    padding: 80px 5%;
+}
+@media (max-width: 768px) {
+    .nosotros-hero {
+        height: 40vh !important;
+        min-height: 280px !important;
+        padding: 30px 5% !important;
+    }
 }
 .grid-nosotros-blanco {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .grid-nosotros-blanco {
+        grid-template-columns: 1fr;
+    }
 }
 .tarjeta-blanca {
     background-color: #ffffff;
@@ -262,6 +156,74 @@ footer a:hover {
     font-size: 1rem;
     line-height: 1.7;
     margin: 0;
+}
+.contenedor-galeria-horizontal{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 50px;
+}
+.contenedor-galeria-horizontal img{
+    width: calc(20% - 15px);
+    min-width: 150px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #1b4d6b;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .contenedor-galeria-horizontal {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.galeria-casos {
+    background-color: #1b4d6b; 
+    padding: 40px 5%;
+    text-align: center;
+    margin-top: 50px;
+}
+/* Estilos Modal */
+.modal-oculto{
+    display: none;
+    position: fixed !important;
+    z-index: 9999 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    transition: opacity 0.4 ease;
+}
+.modal-contenido{
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain !important;
+    border: 2px solid #1b4d6b;
+    border-radius: 8px !important;
+    margin: 0 auto !important;
+    animation: zoom 0.3s;
+}
+@keyframes zoom {
+    from{transform: scale(0.7);}
+    to{transform: scale(1);}
+}
+.cerrar-modal{
+    position: absolute !important;
+    top: 20px;
+    right: 40px;
+    color: #1b4d6b;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 100000 !important;
 }
 .swiper-hero {
     width: 100%;
@@ -314,5 +276,20 @@ footer a:hover {
         object-fit: cover !important;
         object-position: center !important;
         z-index: 0 !important;  
+    }
+}
+@media (max-width: 480px) {
+    .nosotros-hero{
+        padding: 40px 5% !important;
+    }
+    .contenedor-galeria-horizontal {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+     .contenedor-galeria-horizontal img{
+        width: calc(50% - 10px) !important;
+        height: 150px !important;
     }
 }
