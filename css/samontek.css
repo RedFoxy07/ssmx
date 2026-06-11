@@ -85,8 +85,7 @@ footer a:hover {
     position: relative;
     margin-top: 25px;
     width: 100%;
-    height: 60vh;
-    min-height: auto;
+    min-height: 60vh;
     background-image: linear-gradient(rgba(0, 25, 40, 0.8), rgba(0, 35, 55, 0.9)), url('../img/samontek/samontek-hero2.jpeg');
     background-size: cover;
     background-position: center;
@@ -96,15 +95,14 @@ footer a:hover {
 }
 @media (max-width: 768px) {
     .nosotros-hero {
-        height: 40vh !important;
-        min-height: 280px !important;
+        min-height: auto !important;
         padding: 30px 5% !important;
     }
 }
 .grid-nosotros-blanco {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -112,6 +110,15 @@ footer a:hover {
 @media (max-width: 768px) {
     .grid-nosotros-blanco {
         grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+}
+@media (max-width: 480px) {
+    .grid-nosotros-blanco {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 5px;
     }
 }
 .tarjeta-blanca {
