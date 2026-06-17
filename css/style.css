@@ -472,9 +472,6 @@ footer a:hover {
     color: white;
     text-decoration: underline;
 }
-/* =========================================
-   CONTENEDOR DE INFORMACIÓN (ESTILO PANEL)
-========================================= */
 .contenedor-info-categorias {
     background-color: #111111;
     border: 1px solid #333333;
@@ -548,7 +545,7 @@ footer a:hover {
         align-items: center;
     }
     .contenedor-info-categorias:not(.espejo) .lista-caracteristicas li {
-    direction: rtl; /* Cambia el flujo: el punto aparece a la derecha */
+    direction: rtl;
     text-align: right;
 }
     .columna-texto {
@@ -695,6 +692,11 @@ footer a:hover {
 }
 .contenedor-info-categorias.espejo .columna-texto {
     text-align: left;
+}
+.subcategoria-hero{
+    background-repeat: no-repeat !important; 
+    background-size: cover !important; 
+    background-position: center center !important;
 }
 .modal-oculto{
     display: none;
