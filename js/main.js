@@ -179,3 +179,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     
     });
+document.addEventListener('DOMContentLoaded', function() {
+    const bolitas = document.querySelectorAll('.contenedor-bolita');
+    bolitas.forEach(bolita => {
+        bolita.addEventListener('click', function(e) {
+            if(window.matchMedia("(hover: hover)").matches) {
+                return;
+            }
+        const estaAbierta = this.classList.contains('activo');
+        bolitas.forEach(b => b.classList.remove('activo'));
+        if (!estaAbierta) {
+            e.preventDefault();
+            this.classList.add('activo');
+        }
+        });
+    });
+});
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.contenedor-bolita')) {
+        bolitas.forEach(b => b.classList.remove('activo'));
+    }
+});
