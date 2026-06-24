@@ -12,6 +12,7 @@ html, body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
 }
 h1, h2, h3, h4, .boton-categoria {
     font-family: 'Poppins', sans-serif;
@@ -980,7 +981,7 @@ footer a:hover {
 .img-contenedor {
     width: 100%;
     height: 220px;
-    background-color: #f1f5f9;
+    background-color: #000000;
     position: relative;
     border-bottom: 1px solid #f1f5f9;
 }

@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "productos";
+$base_datos = "inventario";
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
 if ($conexion->connect_error) {
@@ -52,7 +52,7 @@ $resultado = $conexion->query($sql);
                     <div class="info-contenedor">
                         <div>
                             <h3 class="nombre-prod"><?php echo $producto['nombre']; ?></h3>
-                            <p class="desc-prod"><?php echo $producto['descripcion']; ?></p>
+                            <li class="desc-prod"><?php echo $producto['descripcion']; ?></li>
                         </div>
                         <div class="caja-precio-boton">
                             <p class="precio-prod">$<?php echo number_format($producto['precio'], 2); ?> MXN</p>
