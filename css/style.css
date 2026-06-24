@@ -281,9 +281,7 @@ header {
     line-height: 1.6;
     font-size: 1.25rem;
 }
-/*==========================================
-      Seccion de socios
-============================================*/
+/* Seccion de socios */
 .seccion-socios{
     background-color: #121212;
     padding: 60px max(5%, 15px);
@@ -935,4 +933,103 @@ footer a:hover {
 
 .seccion-filtrada {
     animation: aparecerSuave 0.5s ease-out forwards;
+}
+/* =========================================
+   SECCIÓN: COTIZADOR DE PRODUCTOS
+========================================= */
+.main-cotizador {
+    padding: 60px 20px;
+    min-height: 60vh;
+}
+
+.cotizador-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titulo-cotizador {
+    text-align: center;
+    color: #ffd700;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+/* El Grid que acomoda las tarjetas automáticamente según la pantalla */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+.tarjeta-producto {
+    background: #121212;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1);
+}
+
+.img-contenedor {
+    width: 100%;
+    height: 220px;
+    background-color: #f1f5f9;
+    position: relative;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.img-contenedor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.info-contenedor {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.nombre-prod {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+.desc-prod {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+.caja-precio-boton {
+    margin-top: auto;
+}
+.precio-prod {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffd700;
+    margin: 0 0 15px 0;
+}
+.btn-cotizar {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffd700;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-cotizar:hover {
+    background-color: #334155;
 }
