@@ -935,9 +935,7 @@ footer a:hover {
 .seccion-filtrada {
     animation: aparecerSuave 0.5s ease-out forwards;
 }
-/* =========================================
-   SECCIÓN: COTIZADOR DE PRODUCTOS
-========================================= */
+
 .main-cotizador {
     padding: 60px 20px;
     min-height: 60vh;
@@ -1033,4 +1031,47 @@ footer a:hover {
 }
 .btn-cotizar:hover {
     background-color: #334155;
+}
+.seccion-arma-kit {
+    padding: 60px max(5%, 15px);
+    margin-top: 50px;   
+}
+.tarjeta-horizontal{
+    display: flex;
+    max-width: 1100px;
+    flex-direction: row;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+.tarjeta-horizontal-img{
+    flex: 0 0 70%;
+    min-height: 350px;
+}
+.tarjeta-horizontal-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.tarjeta-horizontal-info{
+    flex: 0 0 30%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tarjeta-horizontal-info h4{
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 0;
+    margin-bottom: 15px;
+}
+.btn-ir-kit{
+    background-color: #FFD700;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
 }
