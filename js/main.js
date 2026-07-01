@@ -200,3 +200,79 @@ document.addEventListener('click', function(e) {
         bolitas.forEach(b => b.classList.remove('activo'));
     }
 });
+let carrito = [];
+ 
+function agregarAlKit(nombre, precio) {
+    carrito.push({ nombre, precio });
+    actualizarCarritoUI();
+    abrirCarrito();
+}
+function actualizarCarritoUI() {
+    const lista = document.getElementById('listaCarrito');
+    const totalEl = document.getElementById('total-precio');
+    if (!lista || !totalEl) return;
+    lista.innerHTML = '';
+    let total = 0;
+    carrito.forEach((item, index) => {
+        const itemHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ddd; color: white;">
+                <div>
+                    <p style="margin: 0; font-weight: bold;">${item.nombre}</p>
+                    <p style="margin: 5px 0 0 0; color: #aaa;">$${item.precio.toFixed(2)}</p>
+                </div>
+                <button onclick="eliminarDelCarrito(${index})" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                    ✕
+                </button>
+            </div>
+        `;
+        lista.innerHTML += itemHTML;
+        total += item.precio;
+    });
+    totalEl.innerText = `$${total.toFixed(2)}`;
+    document.getElementById('contador-items').innerText = carrito.length;
+}
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarCarritoUI();
+}
+function limpiarCarrito() {
+    carrito = [];
+    actualizarCarritoUI();
+}
+function abrirCarrito() {
+    const panel = document.getElementById('panelCarrito');
+    if (panel) {
+        panel.classList.add('activo');
+    }
+}
+function cerrarCarrito() {
+    const panel = document.getElementById('panelCarrito');
+    if (panel) {
+        panel.classList.remove('activo');
+    }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const botonesAgregar = document.querySelectorAll('.btn-cotizar');
+    botonesAgregar.forEach(boton => {
+        boton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tarjeta = this.closest('.tarjeta-producto');
+            if (!tarjeta) return;
+            const nombre = tarjeta.querySelector('.nombre-prod')?.textContent || 'Producto sin nombre';
+            const precioText = tarjeta.querySelector('.precio-prod')?.textContent || '0';
+            const precio = parseFloat(
+                precioText.replace('$', '').replace(' MXN', '').replace(',', '')
+            );
+            agregarAlKit(nombre, precio);
+            const textOriginal = this.textContent;
+            this.textContent = '✓ Agregado';
+            this.style.backgroundColor = '#28a745';
+            this.disabled = true;
+            setTimeout(() => {
+                this.textContent = textOriginal;
+                this.style.backgroundColor = '';
+                this.disabled = false;
+            }, 2000);
+        });
+    });
+});

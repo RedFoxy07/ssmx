@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "inventario";
+$base_datos = "productos";
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
 if ($conexion->connect_error) {
@@ -66,6 +66,25 @@ $resultado = $conexion->query($sql);
             <?php } ?>
             </div>
     </div>
+    <button class="btn-carrito-flotante" onclick="abrirCarrito()">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="contador-items">0</span>
+</button>
+
+<div class="overlay-carrito" id="overlayCarrito" onclick="cerrarCarrito()"></div>
+<div class="panel-carrito" id="panelCarrito">
+    <div class="carrito-cabecera">
+        <h3>Tu Kit de Seguridad</h3>
+        <button onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <div class="carrito-contenido" id="listaCarrito">
+        </div>
+    <div class="carrito-footer">
+        <p>Total Estimado: <span id="total-precio">$0.00</span></p>
+        <button class="btn-solicitar" onclick="enviarWhatsApp()"> Solicitar Cotización</button>
+    </div>
+</div>
 </main>
 <footer>
         <div class="contact-links">
