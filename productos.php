@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "productos";
+$base_datos = "ssmx_db";
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
 if ($conexion->connect_error) {
@@ -77,12 +77,22 @@ $resultado = $conexion->query($sql);
         <h3>Tu Kit de Seguridad</h3>
         <button onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
     </div>
-    
     <div class="carrito-contenido" id="listaCarrito">
         </div>
-    <div class="carrito-footer">
-        <p>Total Estimado: <span id="total-precio">$0.00</span></p>
-        <button class="btn-solicitar" onclick="enviarWhatsApp()"> Solicitar Cotización</button>
+        <div class="carrito-formulario" style="padding: 20px; border-top: 1px solid #333;">
+        <form action="guardar_cotizacion.php" method="POST" id="formCotizacion">
+            <input type="text" name="nombre" placeholder="Tu Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+            <input type="tel" name="telefono" placeholder="Numero Telefonico" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+            <input type="text" name="direccion" placeholder="Estado y Municipio" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+            <label style="color: #ccc; font-size: 0.9rem; display: block; margin-bottom: 15px;">
+            <input type="checkbox" name="factura" value="1"> Requiero Factura (+16% IVA)
+            </label>
+            <input type="hidden" name="equipos_json" id="input_json">
+            <input type="hidden" name="subtotal" id="input_subtotal">
+            <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
+            <p>Total Estimado: <span id="total-precio">$0.00</span></p>
+            <p style="color: #666; font-size: 0.75rem; margin-bottom: 15px;">*Los viáticos e instalación final se cotizarán tras evaluar el sitio.</p>
+        </form>
     </div>
 </div>
 </main>

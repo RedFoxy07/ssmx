@@ -230,6 +230,8 @@ function actualizarCarritoUI() {
     });
     totalEl.innerText = `$${total.toFixed(2)}`;
     document.getElementById('contador-items').innerText = carrito.length;
+    document.getElementById('total-precio').innerText = `$${total.toLocaleString()}`;
+    document.getElementById('input_subtotal').value = total;
 }
 function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
@@ -265,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
             );
             agregarAlKit(nombre, precio);
             const textOriginal = this.textContent;
-            this.textContent = '✓ Agregado';
+            this.textContent = 'Agregado';
             this.style.backgroundColor = '#28a745';
             this.disabled = true;
             setTimeout(() => {
@@ -276,3 +278,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+document.getElementById('input_json').value = JSON.stringify(carrito);
+document.getElementById('input_subtotal').value = total;
+function verDetallesCotizacion(btn) {
+    try {
+        const stringEquipos = btn.getAttribute('data-equipos');
+        const equipos = JSON.parse(stringEquipos);
+        const subtotal = parseFloat(btn.getAttribute('data-subtotal'));
+        const iva = parseFloat(btn.getAttribute('data-iva'));
+        const total = parseFloat(btn.getAttribute('data-total'));
+        const contenedor = document.getElementById('contenedorEquiposDetalle');
+        contenedor.innerHTML = '';
+        equipos.forEach(item => {
+            const nombreProducto = item.nombre || item.producto || Object.values(item)[0] || "Equipo de Seguridad";
+            const precioProducto = item.precio || item.costo || Object.values(item)[1] || 0;
+            contenedor.innerHTML += `
+                <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222;">
+                    <span style="color: #fff;">• ${item.nombre}</span>
+                    <span style="color: #ffd700;">$${parseFloat(item.precio).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                </div>`;
+        });
+        document.getElementById('detSubtotal').innerText = `$${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        document.getElementById('detIva').innerText = `$${iva.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        document.getElementById('detTotal').innerText = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        document.getElementById('panelAdminLateral').classList.add('activo');
+    } catch (error) {
+        console.error("Error al desempaquetar el kit de equipos:", error);
+        alert("Hubo un problema al leer el desglose de esta cotización.");
+    }
+}
+function cerrarPanelAdmin() {
+    document.getElementById('panelAdminLateral').classList.remove('activo');
+}
+function revisarYEnviar() {
+    console.log("Contenido actual del carrito antes de enviar:", carrito);
+    const jsonTexto = JSON.stringify(carrito);
+    document.getElementById('input_json').value = jsonTexto;
+    if (carrito.length === 0) {
+        alert("El carrito Está vacío. Por favor, agrega al menos un producto antes de enviar la cotización.");
+        return;
+    }
+    document.getElementById('formCotizacion').submit();
+}

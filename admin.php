@@ -16,8 +16,10 @@ if (isset($_GET['logout'])) {
     header("Location: admin.php");
     exit;
 }
+$conn = new mysqli("localhost", "root", "", "ssmx_db");
+if ($conn->connect_error) { die("Error de conexión: " . $conn->connect_error); }
+$result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,80 +65,76 @@ if (isset($_GET['logout'])) {
 
     <?php } else { ?>
         <div class="dashboard-wrapper">
-            <h2 style="color: #ffffff; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 20px;">Últimas Cotizaciones</h2>
-            
-            <div class="tabla-responsive">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Cliente</th>
-                            <th>Teléfono</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>#COT-1045</strong></td>
-                            <td>Juan Pérez</td>
-                            <td>55 1234 5678</td>
-                            <td>Estado de México</td>
-                            <td>Hoy, 10:30 AM</td>
-                            <td>
-                                <button class="btn-ver-detalle" onclick="abrirPanel()">Ver Detalles</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <h2>Historial de Cotizaciones Recibidas</h2>
+    <div class="tabla-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Folio</th>
+                    <th>Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Ubicación</th>
+                    <th>Factura</th>
+                    <th>Total</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><strong style="color: #ffd700;"><?php echo $row['folio']; ?></strong></td>
+                        <td><?php echo htmlspecialchars($row['nombre_cliente']); ?></td>
+                        <td><?php echo htmlspecialchars($row['telefono']); ?></td>
+                        <td><?php echo htmlspecialchars($row['direccion']); ?></td>
+                        <td>
+                            <?php echo $row['requiere_factura'] == 1 ? '<span style="color:#25d366;">Sí (+16%)</span>' : 'No (Sin IVA)'; ?>
+                        </td>
+                        <td><strong>$<?php echo number_format($row['total_estimado'], 2); ?></strong></td>
+                        <td>
+                            <span class="badge-estatus" style="padding: 4px 8px; border-radius: 4px; background: #222; border: 1px solid #ffd700; font-size: 0.8rem;">
+                                <?php echo $row['estatus']; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn-ver-detalle" 
+                                    data-equipos='<?php echo htmlspecialchars($row['equipos_json'], ENT_QUOTES, 'UTF-8'); ?>'
+                                    data-subtotal="<?php echo $row['subtotal']; ?>"
+                                    data-iva="<?php echo $row['iva']; ?>"
+                                    data-total="<?php echo $row['total_estimado']; ?>"
+                                    onclick="verDetallesCotizacion(this)">
+                                Ver Detalles
+                            </button>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        <div class="overlay-panel" id="overlayPanel" onclick="cerrarPanel()"></div>
+<div class="panel-lateral" id="panelAdminLateral">
+    <div class="panel-cabecera">
+        <h3>Detalle de Equipos Solicitados</h3>
+        <button onclick="cerrarPanelAdmin()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#000;">&times;</button>
+    </div>
+    <div class="panel-cuerpo">
+        <div id="contenedorEquiposDetalle">
+            </div>
         
-        <div class="panel-lateral" id="panelLateral">
-            <div class="panel-cabecera">
-                <h3>Detalle de Cotización</h3>
-                <button class="btn-cerrar-panel" onclick="cerrarPanel()"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="panel-cuerpo">
-                <div class="info-cliente">
-                    <p><strong>Cliente:</strong> Juan Pérez</p>
-                    <p><strong>Teléfono:</strong> <a href="https://wa.me/525512345678">55 1234 5678 <i class="fab fa-whatsapp"></i></a></p>
-                    <p><strong>Estado:</strong> Estado de México</p>
-                    <p><strong>Requiere Factura:</strong> Sí</p>
-                </div>
-                <h4 style="margin-top: 20px; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px;">Equipos Seleccionados</h4>
-                <ul class="lista-equipos">
-                    <li>4x Cámara Domo 2MP Análoga Hikvision</li>
-                    <li>1x DVR 4 Canales 1080p</li>
-                    <li>1x Disco Duro 1TB Western Digital</li>
-                </ul>
-                <div class="total-estimado">
-                    <p>Total Equipos Estimado:</p>
-                    <h3>$4,500.00 MXN</h3>
-                </div>
-            </div>
+        <div class="total-estimado">
+            <p style="margin: 5px 0; color: #aaa;">Subtotal: <span id="detSubtotal">$0.00</span></p>
+            <p style="margin: 5px 0; color: #aaa;">IVA: <span id="detIva">$0.00</span></p>
+            <hr style="border-color: #333;">
+            <h3>Total: <span id="detTotal">$0.00</span></h3>
         </div>
+    </div>
+</div>
 
     <?php } ?>
 </main>
 <footer>
-    </footer>
-<script>
-    function abrirPanel() {
-        document.getElementById('panelLateral').classList.add('activo');
-        document.getElementById('overlayPanel').classList.add('activo');
-        document.body.style.overflow = 'hidden'; // Evita que se haga scroll en el fondo
-    }
-
-    function cerrarPanel() {
-        document.getElementById('panelLateral').classList.remove('activo');
-        document.getElementById('overlayPanel').classList.remove('activo');
-        document.body.style.overflow = 'auto'; // Vuelve a permitir scroll
-    }
-</script>
+</footer>
+<script src="js/main.js"></script>
 </body>
 </html>
