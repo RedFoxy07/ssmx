@@ -1,16 +1,14 @@
 <?php
 session_start();
-$contraseña_correcta = "admin123";
-$error = "";
+require 'config.php';
 
 if (isset($_POST['login'])) {
-    if ($_POST['password'] === $contraseña_correcta) {
+    if ($_POST['password'] === ADMIN_PASSWORD) {
         $_SESSION['logueado'] = true;
     } else {
-        $error = "Contraseña incorrecta. Intenta de nuevo.";
+        $error = "Contraseña incorrecta.";
     }
 }
-
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: admin.php");
