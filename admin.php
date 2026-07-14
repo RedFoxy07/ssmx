@@ -1,12 +1,32 @@
 <?php
 session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 require 'config.php';
-
+if (isset($_SESSION['last_attempt_time']) && time() - $_SESSION['last_attempt_time'] > 900) {
+    $_SESSION['login_attempts'] = 0;
+}
+$blocked = false;
+if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 5) {
+    if (time() - $_SESSION['last_attempt_time'] < 900) {
+        $blocked = true;
+        $error = "Demasiados intentos fallidos. Intenta en 15 minutos.";
+    }
+}
 if (isset($_POST['login'])) {
-    if ($_POST['password'] === ADMIN_PASSWORD) {
+    if ($blocked) {
+    } elseif (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "Token inválido. Intenta de nuevo.";
+        $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+        $_SESSION['last_attempt_time'] = time();
+    } elseif ($_POST['password'] === ADMIN_PASSWORD) {
         $_SESSION['logueado'] = true;
+        $_SESSION['login_attempts'] = 0;
     } else {
         $error = "Contraseña incorrecta.";
+        $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+        $_SESSION['last_attempt_time'] = time();
     }
 }
 if (isset($_GET['logout'])) {
@@ -56,9 +76,10 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
             <h2>SSMX Admin</h2>
             <?php if($error) echo "<p class='error-msg'>$error</p>"; ?>
             <form method="POST" action="">
-                <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
-                <button type="submit" name="login" class="btn-login">Entrar al Panel</button>
-            </form>
+    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+    <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
+    <button type="submit" name="login" class="btn-login">Entrar al Panel</button>
+</form>
         </div>
 
     <?php } else { ?>

@@ -8,8 +8,9 @@ $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
-$sql = "SELECT * FROM inventario"; 
-$resultado = $conexion->query($sql);
+$stmt = $conexion->prepare("SELECT * FROM inventario");
+$stmt->execute();
+$resultado = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,6 +64,7 @@ $resultado = $conexion->query($sql);
     </div>
     <button class="btn-cotizar" onclick="agregarAlKit(
         this.closest('.tarjeta-producto').querySelector('.nombre-prod').textContent,
+        this.closest('.tarjeta-producto').querySelector('.precio-prod').textContent,
         this)">
         Agregar al carrito
     </button>
