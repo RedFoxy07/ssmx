@@ -9,7 +9,6 @@ window.onload = function() {
             navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
     }
-
     if (document.querySelector('.swiper-marcas')) {
         new Swiper('.swiper-marcas', {
             slidesPerView: 2,
@@ -25,63 +24,48 @@ window.onload = function() {
         });
     }
 };
-
 document.addEventListener('DOMContentLoaded', () => {
-
     const filtroCategoria = document.getElementById('filtroCategoria');
     const filtroMarca = document.getElementById('filtroMarca');
     const buscador = document.getElementById('inputBuscador');
     const productos = document.querySelectorAll('.tarjeta-producto');
-
     function filtrarProductos() {
         if (!filtroCategoria || !filtroMarca) return;
-
         const texto = buscador ? buscador.value.toLowerCase() : "";
         const categoria = filtroCategoria.value;
         const marca = filtroMarca.value;
-
         productos.forEach(producto => {        
             const nombre = producto.querySelector('h3').textContent.toLowerCase();
             const descripcion = producto.querySelector('p') ? producto.querySelector('p').textContent.toLowerCase() : "";
             const categoriaProducto = producto.getAttribute('data-categoria');
             const marcaProducto = producto.getAttribute('data-marca');
-
             const pasaTexto = nombre.includes(texto) || descripcion.includes(texto);
             const pasaCategoria = categoria === 'todas' || categoriaProducto === categoria;
             const pasaMarca = marca === 'todas' || marcaProducto === marca;
-
             producto.style.display = (pasaTexto && pasaCategoria && pasaMarca) ? 'flex' : 'none';
         });
     }
-
     const parametrosURL = new URLSearchParams(window.location.search);
     const categoriaURL = parametrosURL.get('cat');
     if (categoriaURL && filtroCategoria) {
         filtroCategoria.value = categoriaURL;
     }
-
     filtrarProductos();
-
     if (buscador) buscador.addEventListener('input', filtrarProductos);
     if (filtroCategoria) filtroCategoria.addEventListener('change', filtrarProductos);
     if (filtroMarca) filtroMarca.addEventListener('change', filtrarProductos);
-
     const botonesFiltro = document.querySelectorAll('.btn-filtro');
     const seccionesSub = document.querySelectorAll('.seccion-sub');
     const infoGeneral = document.getElementById('info-general-categoria');
     const fotosCasos = document.querySelectorAll('.foto-caso');
     let animandose = false;
-
     if (botonesFiltro.length > 0) {
         botonesFiltro.forEach(boton => {
             boton.addEventListener('click', () => {
                 if (animandose) return;
-
                 const objetivo = boton.getAttribute('data-target');
                 const estaActivo = boton.classList.contains('active');
-
                 if (estaActivo) {
-                    // Cerrar: volver a mostrar info general
                     animandose = true;
                     boton.classList.remove('active');
                     seccionesSub.forEach(s => s.classList.add('oculta'));
@@ -92,22 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         animandose = false;
                     }, 500);
                 } else {
-                    // Abrir: mostrar sección específica
                     animandose = true;
-
-                    // Primero cerrar la sección anterior
                     const seccionActual = document.querySelector('.seccion-sub:not(.oculta)');
                     if (seccionActual) {
                         seccionActual.classList.add('oculta');
                     }
-
-                    // Esperar a que termine la transición de cierre
                     setTimeout(() => {
                         if (infoGeneral) infoGeneral.style.display = 'none';
                         botonesFiltro.forEach(b => b.classList.remove('active'));
                         boton.classList.add('active');
-
-                        // Ahora abrir la nueva sección
                         seccionesSub.forEach(seccion => {
                             if (seccion.id === objetivo) {
                                 seccion.classList.remove('oculta');
@@ -154,12 +131,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-    // Esperamos a que todo el HTML esté cargado en la pantalla
     document.addEventListener('DOMContentLoaded', function() {
-        
         const botones = document.querySelectorAll('.boton-categoria');
-
-        // Usamos la función clásica en lugar de la flecha (=>) para evitar errores en ciertos editores
         botones.forEach(function(boton) {
             boton.addEventListener('click', function() {
                 
@@ -167,11 +140,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 const icono = this.querySelector('.icono');
 
                 if (contenido.style.maxHeight) {
-                    // Cerrar
                     contenido.style.maxHeight = null;
                     icono.textContent = '+';
                 } else {
-                    // Abrir
                     contenido.style.maxHeight = contenido.scrollHeight + "px";
                     icono.textContent = '-';
                 }
@@ -201,37 +172,80 @@ document.addEventListener('click', function(e) {
     }
 });
 let carrito = [];
- 
-function agregarAlKit(nombre, precio) {
-    carrito.push({ nombre, precio });
+function agregarAlKit(nombre, precio, boton) {
+    // Obtener la tarjeta del producto
+    const tarjeta = boton.closest('.tarjeta-producto');
+    if (!tarjeta) return;
+    
+    // Obtener el input de cantidad
+    const inputCantidad = tarjeta.querySelector('.input-cantidad');
+    let cantidadSeleccionada = 1;
+    
+    if (inputCantidad) {
+        cantidadSeleccionada = parseInt(inputCantidad.value) || 1;
+    }
+    let precioLimpio = parseFloat(precio);
+    if (isNaN(precioLimpio)) {
+        // Si aún es NaN, intenta limpiar strings
+        precioLimpio = parseFloat(
+            String(precio)
+                .replace(/[^\d.,]/g, '') // Remove all non-numeric except . and ,
+                .replace(',', '.')
+        ) || 0;
+    }
+    console.log('Agregando:', { nombre, precio: precioLimpio, cantidad: cantidadSeleccionada });
+    const productoExistente = carrito.find(item => item.nombre === nombre);
+    if (productoExistente) {
+        productoExistente.cantidad += cantidadSeleccionada;
+    } else {
+        carrito.push({ 
+            nombre: nombre, 
+            precio: precioLimpio, 
+            cantidad: cantidadSeleccionada 
+        });
+    }
+    if (inputCantidad) {
+        inputCantidad.value = 1;
+    }
     actualizarCarritoUI();
     abrirCarrito();
 }
 function actualizarCarritoUI() {
     const lista = document.getElementById('listaCarrito');
     const totalEl = document.getElementById('total-precio');
+    const contadorEl = document.getElementById('contador-items');
+    const inputSubtotalEl = document.getElementById('input_subtotal');
+    const inputJsonEl = document.getElementById('input_json');
+    
     if (!lista || !totalEl) return;
+    
     lista.innerHTML = '';
     let total = 0;
+    let cantidadTotal = 0;
+
     carrito.forEach((item, index) => {
-        const itemHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ddd; color: white;">
+        const subtotalItem = item.precio * item.cantidad;
+        total += subtotalItem;
+        cantidadTotal += item.cantidad;
+        
+        lista.innerHTML += `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#222; border-radius:5px;">
                 <div>
-                    <p style="margin: 0; font-weight: bold;">${item.nombre}</p>
-                    <p style="margin: 5px 0 0 0; color: #aaa;">$${item.precio.toFixed(2)}</p>
+                    <span style="color:white;">${item.cantidad}x ${item.nombre}</span>
+                    <br>
+                    <span style="color:#ffd700; font-size:0.9em;">$${subtotalItem.toLocaleString('es-MX', {minimumFractionDigits: 2})}</span>
                 </div>
-                <button onclick="eliminarDelCarrito(${index})" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                    ✕
-                </button>
+                <button onclick="eliminarDelCarrito(${index})" style="background:#d32f2f; color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;">Eliminar</button>
             </div>
         `;
-        lista.innerHTML += itemHTML;
-        total += item.precio;
     });
-    totalEl.innerText = `$${total.toFixed(2)}`;
-    document.getElementById('contador-items').innerText = carrito.length;
-    document.getElementById('total-precio').innerText = `$${total.toLocaleString()}`;
-    document.getElementById('input_subtotal').value = total;
+    
+    // Actualizar totales
+    if (contadorEl) contadorEl.innerText = cantidadTotal;
+    totalEl.innerText = `$${total.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
+    
+    if (inputSubtotalEl) inputSubtotalEl.value = total.toFixed(2);
+    if (inputJsonEl) inputJsonEl.value = JSON.stringify(carrito);
 }
 function eliminarDelCarrito(index) {
     carrito.splice(index, 1);
@@ -265,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const precio = parseFloat(
                 precioText.replace('$', '').replace(' MXN', '').replace(',', '')
             );
-            agregarAlKit(nombre, precio);
+            agregarAlKit(nombre, precio, this); // Pasar 'this' (el botón)
             const textOriginal = this.textContent;
             this.textContent = 'Agregado';
             this.style.backgroundColor = '#28a745';
@@ -278,8 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-document.getElementById('input_json').value = JSON.stringify(carrito);
-document.getElementById('input_subtotal').value = total;
+
 function verDetallesCotizacion(btn) {
     try {
         const stringEquipos = btn.getAttribute('data-equipos');
@@ -319,4 +332,12 @@ function revisarYEnviar() {
         return;
     }
     document.getElementById('formCotizacion').submit();
+}
+function cambiarCantidad(botonFlecha, delta) {
+    const contenedor = botonFlecha.parentElement;
+    const input = contenedor.querySelector('.input-cantidad');
+    let nuevaCantidad = parseInt(input.value) + delta;
+    if (nuevaCantidad >= 1) {
+        input.value = nuevaCantidad;
+    }
 }

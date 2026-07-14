@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "ssmx_db";
+$base_datos = "productos";
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
 if ($conexion->connect_error) {
@@ -56,9 +56,17 @@ $resultado = $conexion->query($sql);
                         </div>
                         <div class="caja-precio-boton">
                             <p class="precio-prod">$<?php echo number_format($producto['precio'], 2); ?> MXN</p>
-                            <button class="btn-cotizar" data-id="<?php echo $producto['id']; ?>">
-                                Agregar al carrito
-                            </button>
+                            <div class="control-cantidad">
+        <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, -1)">◀</button>
+        <input type="number" class="input-cantidad" value="1" min="1" readonly>
+        <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, 1)">▶</button>
+    </div>
+    <button class="btn-cotizar" onclick="agregarAlKit(
+        this.closest('.tarjeta-producto').querySelector('.nombre-prod').textContent,
+        this)">
+        Agregar al carrito
+    </button>
+    </div>
                         </div>
                     </div>
                 </div>
