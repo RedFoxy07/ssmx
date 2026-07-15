@@ -55,6 +55,21 @@ if (isset($_GET['logout'])) {
     header("Location: admin.php");
     exit;
 }
+if (isset($_POST['actualizar_estatus']) && isset($_SESSION['logueado'])) {
+    $nuevo_estatus = $_POST['nuevo_estatus'];
+    $folio_cotizacion = $_POST['folio_cotizacion']; 
+
+    $stmt_update = $conn->prepare("UPDATE cotizaciones SET estatus = ? WHERE folio = ?");
+    $stmt_update->bind_param("ss", $nuevo_estatus, $folio_cotizacion);
+    
+    if ($stmt_update->execute()) {
+        header("Location: admin.php");
+        exit;
+    } else {
+        $error = "Error al actualizar el estatus: " . $conn->error;
+    }
+    $stmt_update->close();
+}
 $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
 ?>
 <!DOCTYPE html>
@@ -130,9 +145,17 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
                         </td>
                         <td><strong>$<?php echo number_format($row['total_estimado'], 2); ?></strong></td>
                         <td>
-                            <span class="badge-estatus" style="padding: 4px 8px; border-radius: 4px; background: #222; border: 1px solid #ffd700; font-size: 0.8rem;">
-                                <?php echo $row['estatus']; ?>
-                            </span>
+    <form method="POST" action="" style="display: flex; gap: 5px; align-items: center; margin: 0;">
+        <input type="hidden" name="folio_cotizacion" value="<?php echo $row['folio']; ?>">
+                            <select name="nuevo_estatus" style="padding: 4px; border-radius: 4px; background: #222; color: #fff; border: 1px solid #ffd700; font-size: 0.8rem;">
+                                <option value="Nuevo" <?php if($row['estatus'] == 'Nuevo') echo 'selected'; ?>>Nuevo</option>
+                                <option value="Atendido" <?php if($row['estatus'] == 'Atendido') echo 'selected'; ?>>Atendido</option>
+                                <option value="Cancelado" <?php if($row['estatus'] == 'Cancelado') echo 'selected'; ?>>Cancelado</option>
+                            </select>
+                                <button type="submit" name="actualizar_estatus" style="padding: 4px 8px; background: #ffd700; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;" title="Guardar estatus">
+                                    <i class="fas fa-save"></i>
+                                </button>
+                            </form>
                         </td>
                         <td>
                             <button class="btn-ver-detalle" 
