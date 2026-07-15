@@ -56,19 +56,28 @@ if (isset($_GET['logout'])) {
     exit;
 }
 if (isset($_POST['actualizar_estatus']) && isset($_SESSION['logueado'])) {
-    $nuevo_estatus = $_POST['nuevo_estatus'];
-    $folio_cotizacion = $_POST['folio_cotizacion']; 
-
-    $stmt_update = $conn->prepare("UPDATE cotizaciones SET estatus = ? WHERE folio = ?");
-    $stmt_update->bind_param("ss", $nuevo_estatus, $folio_cotizacion);
-    
-    if ($stmt_update->execute()) {
-        header("Location: admin.php");
-        exit;
+    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "Token inválido. No se puede actualizar el estatus.";
     } else {
-        $error = "Error al actualizar el estatus: " . $conn->error;
+        $estatus_permitidos = ['Nuevo', 'Atendido', 'Cancelado'];
+        $nuevo_estatus = $_POST['nuevo_estatus'];
+        $folio_cotizacion = $_POST['folio_cotizacion'];
+        
+        if (!in_array($nuevo_estatus, $estatus_permitidos)) {
+            $error = "Estatus inválido.";
+        } else {
+            $stmt_update = $conn->prepare("UPDATE cotizaciones SET estatus = ? WHERE folio = ?");
+            $stmt_update->bind_param("ss", $nuevo_estatus, $folio_cotizacion);
+            
+            if ($stmt_update->execute()) {
+                header("Location: admin.php");
+                exit;
+            } else {
+                $error = "Error al actualizar el estatus: " . $conn->error;
+            }
+            $stmt_update->close();
+        }
     }
-    $stmt_update->close();
 }
 $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
 ?>
@@ -145,8 +154,9 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
                         </td>
                         <td><strong>$<?php echo number_format($row['total_estimado'], 2); ?></strong></td>
                         <td>
-    <form method="POST" action="" style="display: flex; gap: 5px; align-items: center; margin: 0;">
-        <input type="hidden" name="folio_cotizacion" value="<?php echo $row['folio']; ?>">
+                            <form method="POST" action="" style="display: flex; gap: 5px; align-items: center; margin: 0;">
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                <input type="hidden" name="folio_cotizacion" value="<?php echo $row['folio']; ?>">
                             <select name="nuevo_estatus" style="padding: 4px; border-radius: 4px; background: #222; color: #fff; border: 1px solid #ffd700; font-size: 0.8rem;">
                                 <option value="Nuevo" <?php if($row['estatus'] == 'Nuevo') echo 'selected'; ?>>Nuevo</option>
                                 <option value="Atendido" <?php if($row['estatus'] == 'Atendido') echo 'selected'; ?>>Atendido</option>

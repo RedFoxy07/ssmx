@@ -60,7 +60,7 @@ $resultado = $stmt->get_result();
                                 <input type="number" class="input-cantidad" value="1" min="1" readonly>
                                 <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, 1)">▶</button>
                             </div>
-                            <button class="btn-cotizar" onclick="agregarAlKit('<?php echo addslashes($producto['nombre']); ?>', <?php echo $producto['precio']; ?>, this)">
+                                <button class="btn-cotizar" onclick="agregarAlKit('<?php echo htmlspecialchars($producto['nombre'], ENT_QUOTES, 'UTF-8'); ?>', <?php echo floatval($producto['precio']); ?>, this)">
                                 Agregar al carrito
                             </button>
                         </div>

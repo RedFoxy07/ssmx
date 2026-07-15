@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $iva = $subtotal * 0.16;
     }
     $total_estimado = $subtotal + $iva;
-    $folio = "COT-" . date("YmdHis");
+    $folio = "COT-" . date("YmdHis") . "-" . uniqid();   
     $sql = "INSERT INTO cotizaciones (folio, nombre_cliente, telefono, direccion, requiere_factura, equipos_json, subtotal, iva, total_estimado)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
