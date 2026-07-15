@@ -1,19 +1,8 @@
 <?php
 session_start();
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-require 'config.php';
-if (isset($_SESSION['last_attempt_time']) && time() - $_SESSION['last_attempt_time'] > 900) {
-    $_SESSION['login_attempts'] = 0;
-}
-$blocked = false;
-if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 5) {
-    if (time() - $_SESSION['last_attempt_time'] < 900) {
-        $blocked = true;
-        $error = "Demasiados intentos fallidos. Intenta en 15 minutos.";
-    }
-}
+$contraseña_correcta = "admin123";
+$error = "";
+
 if (isset($_POST['login'])) {
     if ($blocked) {
     } elseif (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
