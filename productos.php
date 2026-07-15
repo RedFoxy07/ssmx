@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "productos";
+$base_datos = "ssmx_db";
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
 if ($conexion->connect_error) {
@@ -64,7 +64,6 @@ $resultado = $stmt->get_result();
     </div>
     <button class="btn-cotizar" onclick="agregarAlKit(
         this.closest('.tarjeta-producto').querySelector('.nombre-prod').textContent,
-        this.closest('.tarjeta-producto').querySelector('.precio-prod').textContent,
         this)">
         Agregar al carrito
     </button>
