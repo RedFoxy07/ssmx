@@ -1,8 +1,9 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "ssmx_db");
-$conn->set_charset("utf8mb4");
-if ($conn->connect_error) { 
-    die("Error de conexión: " . $conn->connect_error); 
+require 'config.php';
+$conexion = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conexion->set_charset("utf8mb4");
+if ($conexion->connect_error) { 
+    die("Error de conexión: " . $conexion->connect_error); 
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = trim($_POST['nombre'] ?? '');
@@ -29,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $folio = "COT-" . date("YmdHis");
     $sql = "INSERT INTO cotizaciones (folio, nombre_cliente, telefono, direccion, requiere_factura, equipos_json, subtotal, iva, total_estimado)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     if (!$stmt) {
-        die("Error en la preparación: " . $conn->error);
+        die("Error en la preparación: " . $conexion->error);
     }
     $stmt->bind_param("ssssissdd", $folio, $nombre, $telefono, $direccion, $requiere_factura, $equipos_json, $subtotal, $iva, $total_estimado);
     
@@ -49,10 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } else {
         echo "Error al guardar la cotización. Por favor intenta de nuevo.";
-        // En desarrollo, descomenta esto para ver el error:
-        // echo "Error: " . $stmt->error;
     }
     $stmt->close();
 }
-$conn->close();
+$conexion->close();
 ?>

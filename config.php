@@ -1,7 +1,6 @@
 <?php
-define('ADMIN_PASSWORD', 'Sys@2000');
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'ssmx_db');
+define('DB_USER', 'systems1_ssmx');
+define('DB_PASS', 'npQt5}Qv27Ult*FV');
+define('DB_NAME', 'systems1_ssmx_db');
 ?>

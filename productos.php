@@ -1,9 +1,6 @@
 <?php
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
-$base_datos = "ssmx_db";
-$conexion = new mysqli($servidor, $usuario, $password, $base_datos);
+require 'config.php';
+$conexion = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
@@ -47,63 +44,59 @@ $resultado = $stmt->get_result();
                 
                 <div class="tarjeta-producto">
                     <div class="img-contenedor">
-                        <img src="<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>">
+                        <img src="<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                     </div>
                     
                     <div class="info-contenedor">
                         <div>
-                            <h3 class="nombre-prod"><?php echo $producto['nombre']; ?></h3>
-                            <li class="desc-prod"><?php echo $producto['descripcion']; ?></li>
+                            <h3 class="nombre-prod"><?php echo htmlspecialchars($producto['nombre']); ?></h3>
+                            <p class="desc-prod"><?php echo htmlspecialchars($producto['descripcion']); ?></p>
                         </div>
                         <div class="caja-precio-boton">
                             <p class="precio-prod">$<?php echo number_format($producto['precio'], 2); ?> MXN</p>
+                            
                             <div class="control-cantidad">
-        <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, -1)">◀</button>
-        <input type="number" class="input-cantidad" value="1" min="1" readonly>
-        <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, 1)">▶</button>
-    </div>
-    <button class="btn-cotizar" onclick="agregarAlKit(
-        this.closest('.tarjeta-producto').querySelector('.nombre-prod').textContent,
-        this)">
-        Agregar al carrito
-    </button>
-    </div>
+                                <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, -1)">◀</button>
+                                <input type="number" class="input-cantidad" value="1" min="1" readonly>
+                                <button type="button" class="btn-flecha" onclick="cambiarCantidad(this, 1)">▶</button>
+                            </div>
+                            <button class="btn-cotizar" onclick="agregarAlKit('<?php echo addslashes($producto['nombre']); ?>', <?php echo $producto['precio']; ?>, this)">
+                                Agregar al carrito
+                            </button>
                         </div>
                     </div>
                 </div>
-
             <?php } ?>
-            </div>
+        </div>
     </div>
     <button class="btn-carrito-flotante" onclick="abrirCarrito()">
-    <i class="fas fa-shopping-cart"></i>
-    <span id="contador-items">0</span>
-</button>
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-items">0</span>
+    </button>
 
-<div class="overlay-carrito" id="overlayCarrito" onclick="cerrarCarrito()"></div>
-<div class="panel-carrito" id="panelCarrito">
-    <div class="carrito-cabecera">
-        <h3>Tu Kit de Seguridad</h3>
-        <button onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="carrito-contenido" id="listaCarrito">
+    <div class="overlay-carrito" id="overlayCarrito" onclick="cerrarCarrito()"></div>
+    <div class="panel-carrito" id="panelCarrito">
+        <div class="carrito-cabecera">
+            <h3>Tu Kit de Seguridad</h3>
+            <button onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
         </div>
+        <div class="carrito-contenido" id="listaCarrito"></div>
         <div class="carrito-formulario" style="padding: 20px; border-top: 1px solid #333;">
-        <form action="guardar_cotizacion.php" method="POST" id="formCotizacion">
-            <input type="text" name="nombre" placeholder="Tu Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
-            <input type="tel" name="telefono" placeholder="Numero Telefonico" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
-            <input type="text" name="direccion" placeholder="Estado y Municipio" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
-            <label style="color: #ccc; font-size: 0.9rem; display: block; margin-bottom: 15px;">
-            <input type="checkbox" name="factura" value="1"> Requiero Factura (+16% IVA)
-            </label>
-            <input type="hidden" name="equipos_json" id="input_json">
-            <input type="hidden" name="subtotal" id="input_subtotal">
-            <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
-            <p>Total Estimado: <span id="total-precio">$0.00</span></p>
-            <p style="color: #666; font-size: 0.75rem; margin-bottom: 15px;">*Los viáticos e instalación final se cotizarán tras evaluar el sitio.</p>
-        </form>
+            <form action="guardar_cotizacion.php" method="POST" id="formCotizacion">
+                <input type="text" name="nombre" placeholder="Tu Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+                <input type="tel" name="telefono" placeholder="Numero Telefonico" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+                <input type="text" name="direccion" placeholder="Estado y Municipio" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+                <label style="color: #ccc; font-size: 0.9rem; display: block; margin-bottom: 15px;">
+                    <input type="checkbox" name="factura" value="1"> Requiero Factura (+16% IVA)
+                </label>
+                <input type="hidden" name="equipos_json" id="input_json">
+                <input type="hidden" name="subtotal" id="input_subtotal">
+                <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
+                <p>Total Estimado: <span id="total-precio">$0.00</span></p>
+                <p style="color: #666; font-size: 0.75rem; margin-bottom: 15px;">*Los viáticos e instalación final se cotizarán tras evaluar el sitio.</p>
+            </form>
+        </div>
     </div>
-</div>
 </main>
 <footer>
         <div class="contact-links">

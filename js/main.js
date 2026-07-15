@@ -173,11 +173,8 @@ document.addEventListener('click', function(e) {
 });
 let carrito = [];
 function agregarAlKit(nombre, precio, boton) {
-    // Obtener la tarjeta del producto
     const tarjeta = boton.closest('.tarjeta-producto');
     if (!tarjeta) return;
-    
-    // Obtener el input de cantidad
     const inputCantidad = tarjeta.querySelector('.input-cantidad');
     let cantidadSeleccionada = 1;
     
@@ -186,10 +183,9 @@ function agregarAlKit(nombre, precio, boton) {
     }
     let precioLimpio = parseFloat(precio);
     if (isNaN(precioLimpio)) {
-        // Si aún es NaN, intenta limpiar strings
         precioLimpio = parseFloat(
             String(precio)
-                .replace(/[^\d.,]/g, '') // Remove all non-numeric except . and ,
+                .replace(/[^\d.,]/g, '')
                 .replace(',', '.')
         ) || 0;
     }
@@ -209,6 +205,19 @@ function agregarAlKit(nombre, precio, boton) {
     }
     actualizarCarritoUI();
     abrirCarrito();
+}
+if (boton){
+    const textOriginal = boton.textContent;
+    boton.textContent = "Agregado";
+    boton.style.backgroundColor = '#28a745';
+    boton.style.color = '#ffffff';
+    boton.disabled = false;
+    setTimeout(() => {
+        boton.textContent = textOriginal;
+        boton.style.backgroundColor = '';
+        boton.style.color = '';
+        boton.disabled = false;
+    }, 2000);
 }
 function actualizarCarritoUI() {
     const lista = document.getElementById('listaCarrito');
@@ -239,8 +248,6 @@ function actualizarCarritoUI() {
             </div>
         `;
     });
-    
-    // Actualizar totales
     if (contadorEl) contadorEl.innerText = cantidadTotal;
     totalEl.innerText = `$${total.toLocaleString('es-MX', {minimumFractionDigits: 2})}`;
     
@@ -267,32 +274,6 @@ function cerrarCarrito() {
         panel.classList.remove('activo');
     }
 }
-document.addEventListener('DOMContentLoaded', function() {
-    const botonesAgregar = document.querySelectorAll('.btn-cotizar');
-    botonesAgregar.forEach(boton => {
-        boton.addEventListener('click', function(e) {
-            e.preventDefault();
-            const tarjeta = this.closest('.tarjeta-producto');
-            if (!tarjeta) return;
-            const nombre = tarjeta.querySelector('.nombre-prod')?.textContent || 'Producto sin nombre';
-            const precioText = tarjeta.querySelector('.precio-prod')?.textContent || '0';
-            const precio = parseFloat(
-                precioText.replace('$', '').replace(' MXN', '').replace(',', '')
-            );
-            agregarAlKit(nombre, precio, this); // Pasar 'this' (el botón)
-            const textOriginal = this.textContent;
-            this.textContent = 'Agregado';
-            this.style.backgroundColor = '#28a745';
-            this.disabled = true;
-            setTimeout(() => {
-                this.textContent = textOriginal;
-                this.style.backgroundColor = '';
-                this.disabled = false;
-            }, 2000);
-        });
-    });
-});
-
 function verDetallesCotizacion(btn) {
     try {
         const stringEquipos = btn.getAttribute('data-equipos');

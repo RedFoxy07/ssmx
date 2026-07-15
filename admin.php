@@ -4,6 +4,10 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 require 'config.php';
+$error="";
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+if ($conn->connect_error) { die("Error de conexión: " . $conn->connect_error); }
+
 if (isset($_SESSION['last_attempt_time']) && time() - $_SESSION['last_attempt_time'] > 900) {
     $_SESSION['login_attempts'] = 0;
 }
@@ -20,13 +24,30 @@ if (isset($_POST['login'])) {
         $error = "Token inválido. Intenta de nuevo.";
         $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
         $_SESSION['last_attempt_time'] = time();
-    } elseif ($_POST['password'] === ADMIN_PASSWORD) {
-        $_SESSION['logueado'] = true;
-        $_SESSION['login_attempts'] = 0;
     } else {
-        $error = "Contraseña incorrecta.";
-        $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
-        $_SESSION['last_attempt_time'] = time();
+        $usuario_ingresado = $_POST['usuario'];
+        $password_ingresada = $_POST['password'];
+        $stmt = $conn->prepare("SELECT password_hash FROM usuarios_admin WHERE usuario = ?");
+        $stmt->bind_param("s", $usuario_ingresado);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if ($resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            if (password_verify($password_ingresada, $fila['password_hash'])) {
+                $_SESSION['logueado'] = true;
+                $_SESSION['login_attempts'] = 0;
+                $_SESSION['usuario_admin'] = $usuario_ingresado;
+            } else {
+                $error = "Contraseña incorrecta.";
+                $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+                $_SESSION['last_attempt_time'] = time();
+            }
+        } else {
+            $error = "El usuario no existe.";
+            $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
+            $_SESSION['last_attempt_time'] = time();
+        }
+        $stmt->close();
     }
 }
 if (isset($_GET['logout'])) {
@@ -34,8 +55,6 @@ if (isset($_GET['logout'])) {
     header("Location: admin.php");
     exit;
 }
-$conn = new mysqli("localhost", "root", "", "ssmx_db");
-if ($conn->connect_error) { die("Error de conexión: " . $conn->connect_error); }
 $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
 ?>
 <!DOCTYPE html>
@@ -65,7 +84,7 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
     <nav>
         <ul class="menu">
             <?php if (isset($_SESSION['logueado'])) { ?>
-                <a href="?logout=true" style="color: #ef4444; font-weight: bold;">Cerrar Sesión</a></li>
+                <a href="?logout=true" style="color: #ef4444; font-weight: bold;">Cerrar Sesión</a>
             <?php } ?>
         </ul>
     </nav>
@@ -77,11 +96,11 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
             <?php if($error) echo "<p class='error-msg'>$error</p>"; ?>
             <form method="POST" action="">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-    <input type="password" name="password" placeholder="Ingresa tu contraseña" required>
+    <input type="text" name="usuario" placeholder="Ingresa tu usuario" required style="margin-bottom: 10px; width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <input type="password" name="password" placeholder="Ingresa tu contraseña" required style="margin-bottom: 15px; width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
     <button type="submit" name="login" class="btn-login">Entrar al Panel</button>
 </form>
         </div>
-
     <?php } else { ?>
         <div class="dashboard-wrapper">
     <h2>Historial de Cotizaciones Recibidas</h2>
