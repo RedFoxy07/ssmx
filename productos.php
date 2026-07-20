@@ -91,6 +91,12 @@ $resultado = $stmt->get_result();
                 </label>
                 <input type="hidden" name="equipos_json" id="input_json">
                 <input type="hidden" name="subtotal" id="input_subtotal">
+                <label style="color: #ccc; font-size: 0.85rem; margin-bottom: 15px;">
+                <input type="checkbox" name="acepta_privacidad" required>
+                    Acepto el <a href="/aviso-privacidad.html" target="_blank" style="color: #ffd700;">
+                    Aviso de Privacidad</a> y <a href="/terminos-condiciones.html" target="_blank" style="color: #ffd700;">
+                    Términos y Condiciones</a>
+                </label>
                 <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
                 <p>Total Estimado: <span id="total-precio">$0.00</span></p>
                 <p style="color: #666; font-size: 0.75rem; margin-bottom: 15px;">*Los viáticos e instalación final se cotizarán tras evaluar el sitio.</p>
@@ -109,7 +115,7 @@ $resultado = $stmt->get_result();
     </div>
     <div class="contenedor-redes-footer">
         <span class="texto-redes">¡Síguenos en nuestras redes sociales!</span>
-        <div class=".redes-sociales-footer">
+        <div class="redes-sociales-footer">
         <a href="https://www.tiktok.com/@ss.mx03" target="_blank" class="icono-red tiktok"><i class="fa-brands fa-tiktok"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61560236490676" target="_blank" class="icono-red facebook"><i class="fa-brands fa-facebook"></i></a>
         <a href="https://youtube.com/@ssmx-2024?si=s9h4MxshQCH4MepR" target="_blank" class="icono-red youtube"><i class="fa-brands fa-youtube"></i></a>
