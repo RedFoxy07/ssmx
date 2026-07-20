@@ -247,7 +247,7 @@ $url_whatsapp = "https://wa.me/" . $numero_empresa . "?text=" . $mensaje;
 <body>
 <header>
     <div class="logo-container" style="display: flex; align-items: center;">
-        <a href="index.php" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+        <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
             <img src="img/logos/logo.png" alt="logo" class="logo-img">
             <span class="logo-text">System Seguridad MX</span>
         </a>
@@ -298,26 +298,30 @@ $url_whatsapp = "https://wa.me/" . $numero_empresa . "?text=" . $mensaje;
         </div>
 
         <div class="enlace-retorno">
-            <a href="index.php"><i class="fas fa-home"></i> Volver al inicio</a>
+            <a href="index.html"><i class="fas fa-home"></i> Volver al inicio</a>
         </div>
     </div>
 </main>
-
 <footer>
-    <div class="contact-links">
+        <div class="contact-links">
         <a href="mailto:contactosystemseguridad@gmail.com" class="btn-contacto btn-correo">
-            <i class="fas fa-envelope"></i>
-            <span>Escribenos un Correo!</span>
-        </a>
-        <div><a href="https://wa.me/5642756440?text=Hola,%20me%20interesa%20una%20cotización" class="btn-contacto btn-whatsapp">
-            <i class="fab fa-whatsapp"></i><span>Contactanos por WhatsApp!</span>
-        </a></div>
-        <div><a href="tel:+525592790958" class="btn-contacto btn-telefono">
-            <i class="fas fa-phone"></i><span>Llamenos!</span>
-        </a></div>
+        <i class="fas fa-envelope"></i>
+        <span>Escribenos un Correo!</span></a>
+        <div><a href="https://wa.me/5642756440?text=Hola,%20me%20interesa%20una%20cotización" class="btn-contacto btn-whatsapp"><i class="fab fa-whatsapp"></i><span>Contactanos por WhatsApp!</span></a></div>
+        <div><a href="tel:+525592790958" class="btn-contacto btn-telefono"><i class="fas fa-phone"></i><span>Llamenos!</span></a></div>
+        <div><a href="https://maps.app.goo.gl/M1gMu6osNP6oCxVE7" target="_blank" class="btn-mapa"><i class="fas fa-map-marked-alt"></i><span>Hidalgo 9, Santiaguito, 54900 Tultitlán, Méx.</span></a></div>
     </div>
+    <div class="contenedor-redes-footer">
+        <span class="texto-redes">¡Síguenos en nuestras redes sociales!</span>
+        <div class=".redes-sociales-footer">
+        <a href="https://www.tiktok.com/@ss.mx03" target="_blank" class="icono-red tiktok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61560236490676" target="_blank" class="icono-red facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://youtube.com/@ssmx-2024?si=s9h4MxshQCH4MepR" target="_blank" class="icono-red youtube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.instagram.com/system_seguridadmx/" target="_blank" class="icono-red instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+    </div>
+    &copy; Todos los Derechos Reservados - System Seguridad MX
 </footer>
-
 <script>
 function copiarAlPortapapeles(texto) {
     navigator.clipboard.writeText(texto).then(() => {

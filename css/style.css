@@ -1260,3 +1260,45 @@ footer a:hover {
         display: block !important;
     }
 }
+.contenedor-legal{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border-top: 4px solid #ffd700;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    color: #ccc;
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.8;
+}
+.contenedor-legal h1{
+    color: #ffd700;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.contenedor-legal h2, .contenedor-legal h3{
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ffd700;
+    padding-bottom: 5px;
+}
+.contenedor-legal p, .contenedor-legal ul{
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+.contenedor-legal ul{
+    padding-left: 20px;
+}
+.contenedor-legal strong{
+    color: #ffd700;
+}
+.fecha-actualizacion{
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 30px;
+    display: block;
+}

@@ -85,7 +85,7 @@ $resultado = $stmt->get_result();
             <form action="guardar_cotizacion.php" method="POST" id="formCotizacion">
                 <input type="text" name="nombre" placeholder="Tu Nombre" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
                 <input type="tel" name="telefono" placeholder="Numero Telefonico" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
-                <input type="text" name="direccion" placeholder="Estado y Municipio" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+                <input type="text" name="direccion" placeholder="Municipio y Codigo Postal" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
                 <label style="color: #ccc; font-size: 0.9rem; display: block; margin-bottom: 15px;">
                     <input type="checkbox" name="factura" value="1"> Requiero Factura (+16% IVA)
                 </label>
@@ -93,8 +93,8 @@ $resultado = $stmt->get_result();
                 <input type="hidden" name="subtotal" id="input_subtotal">
                 <label style="color: #ccc; font-size: 0.85rem; margin-bottom: 15px;">
                 <input type="checkbox" name="acepta_privacidad" required>
-                    Acepto el <a href="/aviso-privacidad.html" target="_blank" style="color: #ffd700;">
-                    Aviso de Privacidad</a> y <a href="/terminos-condiciones.html" target="_blank" style="color: #ffd700;">
+                    Acepto el <a href="privacidad.html" target="_blank" style="color: #ffd700;">
+                    Aviso de Privacidad</a> y <a href="terminos.html" target="_blank" style="color: #ffd700;">
                     Términos y Condiciones</a>
                 </label>
                 <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
