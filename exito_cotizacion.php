@@ -6,14 +6,31 @@ $conexion->set_charset("utf8mb4");
 if ($conexion->connect_error) { 
     die("Error de conexión: " . $conexion->connect_error); 
 }
-$folio = isset($_GET['folio']) ? htmlspecialchars($_GET['folio']) : 'N/A';
-$total = isset($_GET['total']) ? htmlspecialchars($_GET['total']) : '0.00';
-$nombre = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Cliente';
+$folio = isset($_GET['folio']) ? trim($_GET['folio']) : '';
+if (!empty($folio)) {
+    $sql = "SELECT nombre_cliente, total_estimado FROM cotizaciones WHERE folio = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("s", $folio);
+    $stmt->execute();
+    $resultado = $stmt->get_result();   
+    if ($resultado->num_rows > 0) {
+        $datos = $resultado->fetch_assoc();
+        $nombre = htmlspecialchars($datos['nombre_cliente']);
+        $total = $datos['total_estimado'];
+    } else {
+        die("Error: No se encontró ninguna cotización con ese folio.");
+    }
+    $stmt->close();
+} else {
+    header("Location: index.html");
+    exit();
+}
+$conexion->close();
 $numero_empresa = "525642756440";
 $mensaje = "Hola System Seguridad MX, acabo de armar mi kit en su página web.%0A";
-$mensaje .= "*Folio:* " . $folio . "%0A";
+$mensaje .= "*Folio:* " . htmlspecialchars($folio) . "%0A";
 $mensaje .= "*Nombre:* " . $nombre . "%0A";
-$mensaje .= "*Total Estimado:* $" . $total . "%0A%0A";
+$mensaje .= "*Total Estimado:* $" . number_format($total, 2) . "%0A%0A";
 $mensaje .= "¿Me pueden asesorar para agendar una evaluación?";
 $url_whatsapp = "https://wa.me/" . $numero_empresa . "?text=" . $mensaje;
 ?>

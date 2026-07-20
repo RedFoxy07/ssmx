@@ -6,7 +6,6 @@ $conexion->set_charset("utf8mb4");
 if ($conexion->connect_error) { 
     die("Error de conexión: " . $conexion->connect_error); 
 }
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $acepta_privacidad = isset($_POST['acepta_privacidad']) ? 1 : 0;
     if (!$acepta_privacidad) {
@@ -57,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_consent->execute();
             $stmt_consent->close();
         }
-        header("Location: exito-cotizacion.php?folio=" . urlencode($folio) . "&total=" . urlencode($total_estimado) . "&nombre=" . urlencode($nombre));
+        header("Location: exito_cotizacion.php?folio=" . urlencode($folio));
         exit;
     } else {
         echo "Error al guardar la cotización. Por favor intenta de nuevo.";
