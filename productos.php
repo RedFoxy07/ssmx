@@ -2,10 +2,11 @@
 require '../config.php';
 $conexion = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 $conexion->set_charset("utf8mb4");
+
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
-$stmt = $conexion->prepare("SELECT * FROM inventario");
+$stmt = $conexion->prepare("SELECT * FROM inventario ORDER BY categoria ASC, nombre ASC");
 $stmt->execute();
 $resultado = $stmt->get_result();
 ?>
@@ -37,11 +38,19 @@ $resultado = $stmt->get_result();
 </header>
 <main class="main-cotizador">
     <div class="cotizador-container">
-        <h1 class="titulo-cotizador">Arma tu Sistema de Seguridad</h1>
-        
-        <div class="grid-productos">
-            <?php while($producto = $resultado->fetch_assoc()) { ?>
-                
+        <h1 class="titulo-cotizador">Arma tu Sistema de Seguridad</h1> 
+        <?php 
+        $categoria_actual = ""; 
+        while($producto = $resultado->fetch_assoc()) { 
+            if ($producto['categoria'] != $categoria_actual) {
+                if ($categoria_actual != "") {
+                    echo '</div>';
+                }
+                $categoria_actual = $producto['categoria'];
+                echo "<h2 style='color: #ffd700; margin: 40px 0 20px 0; border-bottom: 1px solid #444; padding-bottom: 10px; font-size: 1.8rem;'>" . htmlspecialchars($categoria_actual) . "</h2>";
+                echo '<div class="grid-productos">';
+            }
+        ?>
                 <div class="tarjeta-producto">
                     <div class="img-contenedor">
                         <img src="<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
@@ -66,8 +75,12 @@ $resultado = $stmt->get_result();
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-        </div>
+        <?php 
+        }
+        if ($categoria_actual != "") {
+            echo '</div>';
+        }
+        ?> 
     </div>
     <button class="btn-carrito-flotante" onclick="abrirCarrito()">
         <i class="fas fa-shopping-cart"></i>
