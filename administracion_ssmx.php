@@ -3,7 +3,7 @@ session_start();
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-require 'config.php';
+require '../../config.php';
 $error="";
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if ($conn->connect_error) { die("Error de conexión: " . $conn->connect_error); }
@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: admin.php");
+    header("Location: " . basename(__FILE__));
     exit;
 }
 if (isset($_POST['actualizar_estatus']) && isset($_SESSION['logueado'])) {
@@ -70,7 +70,7 @@ if (isset($_POST['actualizar_estatus']) && isset($_SESSION['logueado'])) {
             $stmt_update->bind_param("ss", $nuevo_estatus, $folio_cotizacion);
             
             if ($stmt_update->execute()) {
-                header("Location: admin.php");
+                header("Location: " . basename(__FILE__));
                 exit;
             } else {
                 $error = "Error al actualizar el estatus: " . $conn->error;
@@ -89,19 +89,19 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
     <title>SSMX Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>    
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon/site.webmanifest">
-    <link rel="shortcut icon" href="img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../img/favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../img/favicon/favicon.ico">
 </head>
 <body>
 <header>
     <div class="logo-container" style="display: flex; align-items: center;">
-        <a href="index.php" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-            <img src="img/logos/logo.png" alt="logo" class="logo-img">
+        <a href="../index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+            <img src="../img/logos/logo.png" alt="logo" class="logo-img">
             <span class="logo-text">System Seguridad MX</span>
         </a>
     </div>
@@ -206,6 +206,6 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
 </main>
 <footer>
 </footer>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
