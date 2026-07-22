@@ -313,14 +313,16 @@ $url_whatsapp = "https://wa.me/" . $numero_empresa . "?text=" . $mensaje;
     </div>
     <div class="contenedor-redes-footer">
         <span class="texto-redes">¡Síguenos en nuestras redes sociales!</span>
-        <div class=".redes-sociales-footer">
+        <div class="redes-sociales-footer">
         <a href="https://www.tiktok.com/@ss.mx03" target="_blank" class="icono-red tiktok"><i class="fa-brands fa-tiktok"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61560236490676" target="_blank" class="icono-red facebook"><i class="fa-brands fa-facebook"></i></a>
         <a href="https://youtube.com/@ssmx-2024?si=s9h4MxshQCH4MepR" target="_blank" class="icono-red youtube"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://www.instagram.com/system_seguridadmx/" target="_blank" class="icono-red instagram"><i class="fa-brands fa-instagram"></i></a>
     </div>
     </div>
-    &copy; Todos los Derechos Reservados - System Seguridad MX
+    &copy; Todos los Derechos Reservados - System Seguridad MX <br>
+    <a href="terminos.html" class="link-terminos">Términos y Condiciones</a> <br>
+    <a href="privacidad.html" class="link-privacidad">Política de Privacidad</a>
 </footer>
 <script>
 function copiarAlPortapapeles(texto) {

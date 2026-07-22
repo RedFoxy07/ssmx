@@ -1080,7 +1080,8 @@ footer a:hover {
     min-height: 350px;
 }
 .tarjeta-horizontal-img img{
-    width: 100%;
+    width: 50%;
+    margin-left: 25%;
     height: 100%;
     object-fit: cover;
 }
@@ -1302,3 +1303,7 @@ footer a:hover {
     margin-bottom: 30px;
     display: block;
 }
+.link-terminos, .link-privacidad{
+    font-weight: bold;
+    color: #fff;
+}   

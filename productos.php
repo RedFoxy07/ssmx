@@ -122,7 +122,9 @@ $resultado = $stmt->get_result();
         <a href="https://www.instagram.com/system_seguridadmx/" target="_blank" class="icono-red instagram"><i class="fa-brands fa-instagram"></i></a>
     </div>
     </div>
-    &copy; Todos los Derechos Reservados - System Seguridad MX
+    &copy; Todos los Derechos Reservados - System Seguridad MX <br>
+    <a href="terminos.html" class="link-terminos">Términos y Condiciones</a> <br>
+    <a href="privacidad.html" class="link-privacidad">Política de Privacidad</a>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/main.js"></script>
