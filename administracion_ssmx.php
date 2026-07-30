@@ -136,6 +136,7 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
                     <th>Cliente</th>
                     <th>Teléfono</th>
                     <th>Ubicación</th>
+                    <th>De donde nos conoce?</th>
                     <th>Factura</th>
                     <th>Total</th>
                     <th>Estatus</th>
@@ -149,6 +150,7 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
                         <td><?php echo htmlspecialchars($row['nombre_cliente']); ?></td>
                         <td><?php echo htmlspecialchars($row['telefono']); ?></td>
                         <td><?php echo htmlspecialchars($row['direccion']); ?></td>
+                        <td><?php echo htmlspecialchars($row['medio_contacto']); ?></td>
                         <td>
                             <?php echo $row['requiere_factura'] == 1 ? '<span style="color:#25d366;">Sí (+16%)</span>' : 'No (Sin IVA)'; ?>
                         </td>

@@ -110,6 +110,15 @@ $resultado = $stmt->get_result();
                     Aviso de Privacidad</a> y <a href="terminos.html" target="_blank" style="color: #ffd700;">
                     Términos y Condiciones</a>
                 </label>
+                <div class="form-group">
+                    <label for="medio_contacto">¿Por donde nos conociste?</label>
+                    <input list="lista_medios" name="medio_contacto" id="medio_contacto" placeholder="Selecciona o Escribe por donde nos conociste" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #222; color: white; border: 1px solid #444;">
+                    <datalist id="lista_medios">
+                        <option value="Página Web">
+                        <option value="Redes Sociales">
+                        <option value="Recomendación">
+                    </datalist>
+                </div>
                 <button type="button" class="btn-solicitar" onclick="revisarYEnviar()">Confirmar y Enviar</button>
                 <p>Total Estimado: <span id="total-precio">$0.00</span></p>
                 <p style="color: #666; font-size: 0.75rem; margin-bottom: 15px;">*Los viáticos e instalación final se cotizarán tras evaluar el sitio.</p>

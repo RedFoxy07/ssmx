@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $equipos_json = trim($_POST['equipos_json'] ?? '');
     $subtotal = floatval($_POST['subtotal'] ?? 0);
     $requiere_factura = isset($_POST['factura']) ? 1 : 0;
+    $medio_contacto = !empty(trim($_POST['medio_contacto'])) ? trim($_POST['medio_contacto']) : 'Página Web';
     if (empty($nombre) || empty($telefono) || empty($direccion) || empty($equipos_json)) {
         die("Error: Todos los campos son requeridos.");
     }
@@ -33,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $total_estimado = $subtotal + $iva;
     $folio = "COT-" . date("YmdHis") . "-" . uniqid();
-    $sql = "INSERT INTO cotizaciones (folio, nombre_cliente, telefono, direccion, requiere_factura, equipos_json, subtotal, iva, total_estimado)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cotizaciones (folio, nombre_cliente, telefono, direccion, requiere_factura, equipos_json, subtotal, iva, total_estimado, medio_contacto)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
     if (!$stmt) {
         die("Error en la preparación: " . $conexion->error);
     }
-    $stmt->bind_param("ssssissdd", $folio, $nombre, $telefono, $direccion, $requiere_factura, $equipos_json, $subtotal, $iva, $total_estimado);
+    $stmt->bind_param("ssssissdds", $folio, $nombre, $telefono, $direccion, $requiere_factura, $equipos_json, $subtotal, $iva, $total_estimado, $medio_contacto);
     if ($stmt->execute()) {
         date_default_timezone_set('America/Mexico_City');
         $id_cotizacion = $conexion->insert_id;
