@@ -1307,3 +1307,57 @@ footer a:hover {
     font-weight: bold;
     color: #fff;
 }   
+.nueva-venta{
+    align-items: center;
+    box-shadow: #1a1a1a;
+
+}
+.venta-wrapper{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border-top: 4px solid #ffd700;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    color: #ccc;
+    font-family: 'Times New Roman', sans-serif;
+    font-weight: bold;
+    line-height: 1.8;
+}
+.columna-venta{
+    align-items: center;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+.form-control{
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.3 ease;
+}
+.form-control:focus{
+    background-color: #ffffff;
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0 ,123, 255, 0.25);
+}
+.boton-venta{
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+.btn-guardar{
+    background-color: #ffd700; 
+    color: #000; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: bold;
+}

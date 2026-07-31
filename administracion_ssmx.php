@@ -3,7 +3,7 @@ session_start();
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-require '../../config.php';
+require 'config.php';
 $error="";
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if ($conn->connect_error) { die("Error de conexión: " . $conn->connect_error); }
@@ -89,7 +89,7 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
     <title>SSMX Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>    
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
@@ -203,7 +203,38 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
         </div>
     </div>
 </div>
-
+<div class="divider"></div>
+    <h1 style="color: #ffd700; text-align: center; margin-top: 10px;">Registrar Nueva Venta</h1>
+    <form action="" method="POST" class="mb-4">
+        <div class= "venta-wrapper">
+            <div class="columna-venta">
+                <label>Nombre del Cliente</label>
+                <input type="text" name="nombre_cliente" class="form-control" required>
+            </div>
+            <div class="columna-venta">
+                <label>Concepto de Venta</label>
+                <input type="text" name="concepto_venta" class="form-control" requiered>
+            </div>
+            <div class="columna-venta">
+                <label> Monto ($)</label>
+                <input type="number" step="0.01" name="monto_original" class="form-control requiered">
+            </div>
+            <div class="columna-venta">
+                <label>Fecha de Venta</label>
+                <input type="date" name="fecha_venta" class="form-control" requiered>
+            </div>
+            <div class="columna-venta">
+                <label>Estatus</label>
+                <select name="estatus_pago" class="form-control">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Pagado">Pagado</option>
+                </select>
+            </div> 
+            <div class="boton-venta">
+            <button type="submit" name="guardar_venta" class="btn btn-guardar">Guardar Venta y Crear Expediente</button>
+        </div>
+        </div>
+    </form>
     <?php } ?>
 </main>
 <footer>
