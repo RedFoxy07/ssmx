@@ -19,7 +19,6 @@ if ($conexion->connect_error) {
 if (isset($_POST['guardar_venta'])) {
     $token_recibido = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
     $token_esperado = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : '';
-    error_log("CSRF DEBUG - Recibido: " . substr($token_recibido, 0, 10) . "... Esperado: " . substr($token_esperado, 0, 10) . "...");
     if (empty($token_recibido) || $token_recibido !== $token_esperado) {
         error_log("Token CSRF inválido para la IP: " . $_SERVER['REMOTE_ADDR']);
         header("Location: administracion_ssmx.php?mensaje=error_csrf");
@@ -126,7 +125,7 @@ if (isset($_POST['guardar_venta'])) {
         exit();
     }
     if ($stmt_venta->execute()) {
-        error_log("Venta registrada exitosamente por usuario: " . $_SESSION['usuario_ingresado'] . " - Fecha original: " . $fecha_venta);
+        error_log("Venta registrada exitosamente por usuario: " . $_SESSION['usuario'] . " - Fecha original: " . $fecha_venta);
         $stmt_venta->close();
         $conexion->close();
         header("Location: administracion_ssmx.php?mensaje=exito");
