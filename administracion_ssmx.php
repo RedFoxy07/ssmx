@@ -50,6 +50,30 @@ if (isset($_POST['login'])) {
         $stmt->close();
     }
 }
+if (isset($_POST['actualizar_estatus_venta']) && isset($_SESSION['logueado'])) {
+    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "Token inválido. No se puede actualizar el estatus.";
+    } else {
+        $estatus_permitidos_venta = ['Pendiente', 'Pagado', 'Atrasado'];
+        $nuevo_estatus_venta = $_POST['nuevo_estatus_venta'];
+        $id_venta = intval($_POST['id_venta']);
+        
+        if (!in_array($nuevo_estatus_venta, $estatus_permitidos_venta)) {
+            $error = "Estatus de venta inválido.";
+        } else {
+            $stmt_update_v = $conn->prepare("UPDATE ventas_externas SET estatus_pago = ? WHERE id_venta = ?");
+            $stmt_update_v->bind_param("si", $nuevo_estatus_venta, $id_venta);
+            
+            if ($stmt_update_v->execute()) {
+                header("Location: " . basename(__FILE__));
+                exit;
+            } else {
+                $error = "Error al actualizar el estatus de venta: " . $conn->error;
+            }
+            $stmt_update_v->close();
+        }
+    }
+}
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: " . basename(__FILE__));
@@ -80,6 +104,7 @@ if (isset($_POST['actualizar_estatus']) && isset($_SESSION['logueado'])) {
     }
 }
 $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
+$result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_registro DESC");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -203,9 +228,23 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
         </div>
     </div>
 </div>
-<div class="divider"></div>
+<div class="divider"></div>  
+    <?php
+    if (isset($_GET['mensaje'])) {
+        if ($_GET['mensaje'] == 'exito') {
+            echo '<div style="background-color: rgba(37, 211, 102, 0.2); border: 1px solid #25d366; color: #25d366; padding: 12px; text-align: center; border-radius: 6px; margin: 15px auto; width: 90%; max-width: 600px; font-weight: bold;">
+                    <i class="fas fa-check-circle"></i> ¡Venta registrada y expediente creado con éxito!
+                  </div>';
+        } elseif ($_GET['mensaje'] == 'error') {
+            echo '<div style="background-color: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 12px; text-align: center; border-radius: 6px; margin: 15px auto; width: 90%; max-width: 600px; font-weight: bold;">
+                    <i class="fas fa-exclamation-triangle"></i> Hubo un error al guardar la venta en la base de datos.
+                  </div>';
+        }
+    }
+    ?>
     <h1 style="color: #ffd700; text-align: center; margin-top: 10px;">Registrar Nueva Venta</h1>
-    <form action="" method="POST" class="mb-4">
+    <form action="procesar_venta.php" method="POST" class="mb-4">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <div class= "venta-wrapper">
             <div class="columna-venta">
                 <label>Nombre del Cliente</label>
@@ -213,16 +252,15 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
             </div>
             <div class="columna-venta">
                 <label>Concepto de Venta</label>
-                <input type="text" name="concepto_venta" class="form-control" requiered>
+                <input type="text" name="concepto_venta" class="form-control" required>
             </div>
             <div class="columna-venta">
                 <label> Monto ($)</label>
-                <input type="number" step="0.01" name="monto_original" class="form-control requiered">
+                <input type="number" step="0.01" name="monto_venta" class="form-control required">
             </div>
             <div class="columna-venta">
-                <label>Fecha de Venta</label>
-                <input type="date" name="fecha_venta" class="form-control" requiered>
-            </div>
+            <label for="fecha_venta">Fecha de Venta </label>
+            <input type="date" id="fecha_venta" name="fecha_venta" class="form-control" required>
             <div class="columna-venta">
                 <label>Estatus</label>
                 <select name="estatus_pago" class="form-control">
@@ -235,6 +273,68 @@ $result = $conn->query("SELECT * FROM cotizaciones ORDER BY fecha DESC");
         </div>
         </div>
     </form>
+    <div class="divider"></div>
+<div class="dashboard-wrapper">
+    <h2 style="color: #ffd700;">Historial de Ventas Externas</h2>
+    <div class="tabla-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Concepto</th>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Estatus</th>
+                    <th>Expediente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($result_ventas && $result_ventas->num_rows > 0): ?>
+                    <?php while($venta = $result_ventas->fetch_assoc()): ?>
+                        <tr>
+                            <td><strong style="color: #ffd700;"><?php echo $venta['id_venta']; ?></strong></td>
+                            <td><?php echo htmlspecialchars($venta['nombre_cliente']); ?></td>
+                            <td><?php echo htmlspecialchars($venta['concepto_venta']); ?></td>
+                            <td><?php echo $venta['fecha_venta']; ?></td>
+                            <td><strong>$<?php echo number_format($venta['monto_venta'], 2); ?></strong></td>
+                            <td>
+                                <form method="POST" action="" style="display: flex; gap: 5px; align-items: center; margin: 0;">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                    <input type="hidden" name="id_venta" value="<?php echo $venta['id_venta']; ?>">
+                                    
+                                    <select name="nuevo_estatus_venta" style="padding: 4px; border-radius: 4px; background: #222; color: #fff; border: 1px solid #ffd700; font-size: 0.8rem;">
+                                        <option value="Pendiente" <?php if($venta['estatus_pago'] == 'Pendiente') echo 'selected'; ?>>Pendiente</option>
+                                        <option value="Pagado" <?php if($venta['estatus_pago'] == 'Pagado') echo 'selected'; ?>>Pagado</option>
+                                        <option value="Atrasado" <?php if($venta['estatus_pago'] == 'Atrasado') echo 'selected'; ?>>Atrasado</option>
+                                    </select>
+                                    
+                                    <button type="submit" name="actualizar_estatus_venta" style="padding: 4px 8px; background: #ffd700; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;" title="Guardar estatus">
+                                        <i class="fas fa-save"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <!-- Botón dinámico del enlace de Drive -->
+                                <?php if (!empty($venta['enlace_nube'])): ?>
+                                    <a href="<?php echo htmlspecialchars($venta['enlace_nube']); ?>" target="_blank" style="display: inline-block; padding: 6px 12px; background: #25d366; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">
+                                        <i class="fas fa-folder-open"></i> Abrir
+                                    </a>
+                                <?php else: ?>
+                                    <span style="color: #aaa; font-size: 0.8rem;">Sin enlace</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #aaa; padding: 20px;">No hay ventas registradas aún.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
     <?php } ?>
 </main>
 <footer>
