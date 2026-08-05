@@ -261,7 +261,8 @@ $result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_regi
             </div>
             <div class="columna-venta">
             <label for="fecha_venta">Fecha de Venta </label>
-            <input type="date" id="fecha_venta" name="fecha_venta" class="form-control" required>
+            <input type="date" id="fecha_venta" name="fecha_venta" class="form-control" required>}
+        </div>
             <div class="columna-venta">
                 <label>Estatus</label>
                 <select name="estatus_pago" class="form-control">
@@ -273,7 +274,6 @@ $result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_regi
             <button type="submit" name="guardar_venta" class="btn btn-guardar">Guardar Venta y Crear Expediente</button>
         </div>
         </div>
-                </div>
     </form>
     <div class="divider"></div>
 <div class="dashboard-wrapper">

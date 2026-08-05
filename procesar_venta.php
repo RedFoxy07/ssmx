@@ -2,6 +2,7 @@
 error_reporting(0);
 ini_set('display_errors', 0);
 require 'config.php';
+require 'vendor/autoload.php';
 session_start();
 if (!isset($_SESSION['logueado'])) {
     error_log("Intento de acceso no autorizado a procesar_venta.php");
@@ -20,7 +21,7 @@ if (isset($_POST['guardar_venta'])) {
     $token_esperado = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : '';
     error_log("CSRF DEBUG - Recibido: " . substr($token_recibido, 0, 10) . "... Esperado: " . substr($token_esperado, 0, 10) . "...");
     if (empty($token_recibido) || $token_recibido !== $token_esperado) {
-        error_log("Token CSRF inválido");
+        error_log("Token CSRF inválido para la IP: " . $_SERVER['REMOTE_ADDR']);
         header("Location: administracion_ssmx.php?mensaje=error_csrf");
         exit();
     }
@@ -89,7 +90,7 @@ if (isset($_POST['guardar_venta'])) {
         header("Location: administracion_ssmx.php?mensaje=error");
         exit();
     }
-    $nombre_carpeta_expediente = "Expendiente - " . $nombre_cliente . " - " . $fecha_para_bd;
+    $nombre_carpeta_expediente = "Expediente - " . $nombre_cliente . " - " . $fecha_para_bd;
     $ruta_credenciales = __DIR__ . '/credenciales-bot.json';
     $id_carpeta_padre = '';
     $enlace_nube = "";
@@ -108,6 +109,7 @@ if (isset($_POST['guardar_venta'])) {
             $enlace_nube = $folder->webViewLink;
         } catch (Exception $e) {
             error_log("Error al crear carpeta en Google Drive: " . $e->getMessage());
+            header("Location: administracion_ssmx.php?mensaje=error_drive");
             exit();
         }
     $sql_venta = "INSERT INTO ventas_externas (nombre_cliente, concepto_venta, monto_venta, estatus_pago, enlace_nube, fecha_venta) 
@@ -124,7 +126,7 @@ if (isset($_POST['guardar_venta'])) {
         exit();
     }
     if ($stmt_venta->execute()) {
-        error_log("Venta registrada exitosamente por usuario: " . $_SESSION['usuario_admin'] . " - Fecha original: " . $fecha_venta);
+        error_log("Venta registrada exitosamente por usuario: " . $_SESSION['usuario_ingresado'] . " - Fecha original: " . $fecha_venta);
         $stmt_venta->close();
         $conexion->close();
         header("Location: administracion_ssmx.php?mensaje=exito");
