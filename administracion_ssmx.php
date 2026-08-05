@@ -272,6 +272,7 @@ $result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_regi
             <button type="submit" name="guardar_venta" class="btn btn-guardar">Guardar Venta y Crear Expediente</button>
         </div>
         </div>
+                </div>
     </form>
     <div class="divider"></div>
 <div class="dashboard-wrapper">
@@ -315,7 +316,6 @@ $result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_regi
                                 </form>
                             </td>
                             <td>
-                                <!-- Botón dinámico del enlace de Drive -->
                                 <?php if (!empty($venta['enlace_nube'])): ?>
                                     <a href="<?php echo htmlspecialchars($venta['enlace_nube']); ?>" target="_blank" style="display: inline-block; padding: 6px 12px; background: #25d366; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.85rem;">
                                         <i class="fas fa-folder-open"></i> Abrir

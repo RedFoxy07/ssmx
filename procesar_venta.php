@@ -1,6 +1,6 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require 'config.php';
 session_start();
 if (!isset($_SESSION['logueado'])) {
@@ -89,17 +89,36 @@ if (isset($_POST['guardar_venta'])) {
         header("Location: administracion_ssmx.php?mensaje=error");
         exit();
     }
-    $enlace_nube_simulado = "https://drive.google.com/drive/folders/MOCK_ID_" . time();
-    $sql_venta = "INSERT INTO ventas_externas (nombre_cliente, concepto_venta, monto_venta, estatus_pago, enlace_nube, fecha_para_bd) 
+    $nombre_carpeta_expediente = "Expendiente - " . $nombre_cliente . " - " . $fecha_para_bd;
+    $ruta_credenciales = __DIR__ . '/credenciales-bot.json';
+    $id_carpeta_padre = '';
+    $enlace_nube = "";
+        try{
+            $client = new \Google_Client();
+            $client->setAuthConfig($ruta_credenciales);
+            $client->addScope(\Google_Service_Drive::DRIVE);
+            $service = new \Google_Service_Drive($client);
+
+            $fileMetadata = new \Google_Service_Drive_DriveFile(array(
+                'name' => $nombre_carpeta_expediente,
+                'mimeType' => 'application/vnd.google-apps.folder',
+                'parents' => array($id_carpeta_padre)
+            ));
+            $folder = $service->files->create($fileMetadata, array('fields' => 'id, webViewLink'));
+            $enlace_nube = $folder->webViewLink;
+        } catch (Exception $e) {
+            error_log("Error al crear carpeta en Google Drive: " . $e->getMessage());
+            exit();
+        }
+    $sql_venta = "INSERT INTO ventas_externas (nombre_cliente, concepto_venta, monto_venta, estatus_pago, enlace_nube, fecha_venta) 
                   VALUES (?, ?, ?, ?, ?, ?)";              
-    
     $stmt_venta = $conexion->prepare($sql_venta);
     if (!$stmt_venta) {
         error_log("Error en prepare(): " . $conexion->error);
         header("Location: administracion_ssmx.php?mensaje=error_conexion");
         exit();
     }
-    if (!$stmt_venta->bind_param("ssdsss", $nombre_cliente, $concepto_venta, $monto_venta, $estatus_pago, $enlace_nube_simulado, $fecha_para_bd)) {
+    if (!$stmt_venta->bind_param("ssdsss", $nombre_cliente, $concepto_venta, $monto_venta, $estatus_pago, $enlace_nube, $fecha_para_bd)) {
         error_log("Error en bind_param(): " . $stmt_venta->error);
         header("Location: administracion_ssmx.php?mensaje=error_conexion");
         exit();
