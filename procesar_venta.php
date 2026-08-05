@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
 require 'config.php';
 session_start();
 if (!isset($_SESSION['logueado'])) {
@@ -20,7 +20,7 @@ if (isset($_POST['guardar_venta'])) {
     $token_esperado = isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : '';
     error_log("CSRF DEBUG - Recibido: " . substr($token_recibido, 0, 10) . "... Esperado: " . substr($token_esperado, 0, 10) . "...");
     if (empty($token_recibido) || $token_recibido !== $token_esperado) {
-        error_log("Token CSRF inválido en procesar_venta.php - Recibido: '$token_recibido' vs Esperado: '$token_esperado'");
+        error_log("Token CSRF inválido");
         header("Location: administracion_ssmx.php?mensaje=error_csrf");
         exit();
     }

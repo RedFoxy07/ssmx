@@ -31,22 +31,23 @@ if (isset($_POST['login'])) {
         $stmt->bind_param("s", $usuario_ingresado);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        if ($resultado->num_rows > 0) {
+        $usuario_encontrado = false;
+        $password_correcta = false;
+        if ($resultado -> num_rows > 0){
             $fila = $resultado->fetch_assoc();
-            if (password_verify($password_ingresada, $fila['password_hash'])) {
+            $password_correcta = password_verify($password_ingresada, $fila['password_hash']);
+            }
+            if($resultado -> num_rows > 0 && $password_correcta){
                 $_SESSION['logueado'] = true;
+                $_SESSION['usuario'] = $usuario_ingresado;
                 $_SESSION['login_attempts'] = 0;
-                $_SESSION['usuario_admin'] = $usuario_ingresado;
+                header("Location: " . basename(__FILE__));
+                exit();
             } else {
-                $error = "Contraseña incorrecta.";
+                $error = "Usuario o contraseña incorrectos.";
                 $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
                 $_SESSION['last_attempt_time'] = time();
             }
-        } else {
-            $error = "El usuario no existe.";
-            $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
-            $_SESSION['last_attempt_time'] = time();
-        }
         $stmt->close();
     }
 }
@@ -142,7 +143,7 @@ $result_ventas = $conn->query("SELECT * FROM ventas_externas ORDER BY fecha_regi
     <?php if (!isset($_SESSION['logueado'])) { ?>
         <div class="login-container">
             <h2>SSMX Admin</h2>
-            <?php if($error) echo "<p class='error-msg'>$error</p>"; ?>
+            <?php if($error) echo "<p class='error-msg'>" . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . "</p>"; ?>
             <form method="POST" action="">
     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
     <input type="text" name="usuario" placeholder="Ingresa tu usuario" required style="margin-bottom: 10px; width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
